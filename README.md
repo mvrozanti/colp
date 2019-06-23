@@ -1,5 +1,5 @@
 # colp
-![](https://i.imgur.com/GT5hJhn.png)
+![](https://i.imgur.com/WIAAZlR.png)
 
 The color processor
 
