@@ -446,8 +446,8 @@ int yy_flex_debug = 0;
 #define YY_MORE_ADJ 0
 #define YY_RESTORE_YY_MORE_OFFSET
 char *yytext;
-#line 1 "calc.l"
-#line 2 "calc.l"
+#line 1 "colp.l"
+#line 2 "colp.l"
 #include "y.tab.h"
 void yyerror (char *s);
 int yylex();
@@ -669,7 +669,7 @@ YY_DECL
 		}
 
 	{
-#line 6 "calc.l"
+#line 6 "colp.l"
 
 #line 674 "lex.yy.c"
 
@@ -730,43 +730,43 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 7 "calc.l"
+#line 7 "colp.l"
 {return print;}
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 8 "calc.l"
+#line 8 "colp.l"
 {return exit_command;}
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 9 "calc.l"
+#line 9 "colp.l"
 {yylval.id = yytext[0]; return identifier;}
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 10 "calc.l"
+#line 10 "colp.l"
 {yylval.num = atoi(yytext); return number;}
 	YY_BREAK
 case 5:
 /* rule 5 can match eol */
 YY_RULE_SETUP
-#line 11 "calc.l"
+#line 11 "colp.l"
 ;
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 12 "calc.l"
+#line 12 "colp.l"
 {return yytext[0];}
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 13 "calc.l"
+#line 13 "colp.l"
 {ECHO; yyerror ("unexpected character");}
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 15 "calc.l"
+#line 15 "colp.l"
 ECHO;
 	YY_BREAK
 #line 772 "lex.yy.c"
@@ -1774,8 +1774,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 15 "calc.l"
+#line 15 "colp.l"
 
 int yywrap (void) {return 1;}
-
 

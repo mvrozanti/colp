@@ -49,30 +49,19 @@ extern int yydebug;
 # define YYTOKENTYPE
   enum yytokentype
   {
-    print = 258,
-    exit_command = 259,
-    number = 260,
-    identifier = 261
+    DIGIT = 258,
+    LETTER = 259,
+    UMINUS = 260
   };
 #endif
 /* Tokens.  */
-#define print 258
-#define exit_command 259
-#define number 260
-#define identifier 261
+#define DIGIT 258
+#define LETTER 259
+#define UMINUS 260
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
-
-union YYSTYPE
-{
-#line 12 "calc.y" /* yacc.c:1921  */
-int num; char id;
-
-#line 73 "y.tab.h" /* yacc.c:1921  */
-};
-
-typedef union YYSTYPE YYSTYPE;
+typedef int YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define YYSTYPE_IS_DECLARED 1
 #endif

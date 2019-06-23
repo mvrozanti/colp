@@ -6,7 +6,6 @@ The color processor
 # Supported Color Models
 - [ ] CMY[K]
 - [ ] RGB/RGBA
-  [ ] - [red|green|blue|r|g|b]
 - [ ] HSV=HSB=HSI=HSD
 - [ ] HEX TRIPLET/QUADRUPLET
 - [ ] HSL
@@ -38,9 +37,8 @@ A member function call always appears as `Color.function`
 - brightness (without arguments)
 - angle (without arguments (what interval?))
 
-## Custom Functions
+## Defining Custom Functions
 ```
-
 
 ```
 
@@ -61,7 +59,7 @@ hsv(0,100.0,100.0)
 ```
 
 # Basic Color Operators
-
+`-+*!`
 
 # Doubts
 - Case-sensitive?
@@ -71,29 +69,24 @@ hsv(0,100.0,100.0)
 
 # Real use-cases
 ```
-> rgb(10,20,30).a == 0
+> rgb(10,20,30).a == 0 # comparisons
 True
-> rgb(10,20,30).r
+> rgb(10,20,30).r # accessing components
 10
-> rgb(10,20,30,40).a
-40
-> rgb(10,20,30).red
-10
-> rgb(10,20,30).r + 1
+> rgb(10,20,30).r + 1 # simple integer operations
 11
-> rgb(10,20,30).r + 1
-11
-> rotate(rgb(10,20,30), -1.)
+> rotate(rgb(10,20,30), -1.) # a built-in function
 rgb(x,y,z)
-> hex(rgb(255,0,0))
-hex(#ff0000)
-> rgb('#ff0000')
-rgb(255,0,0)
-> rgb(1,0,0) + rgb(0,1,0)
-rgb(1,1,0)
-> hsv('#ff0000')
+> hex(rgb(255,0,0)) # conversions
+hex('#ff0000')
+> hsv(hex('#ff0000'))
 hsv(0,100.0,100.0)
-> saturate('#ff0000', )
+> rgb(hex('#ff0000')) 
+rgb(255,0,0)
+> rgb(1,0,0) + rgb(0,1,0) # sum colors
+rgb(1,1,0)
+> saturate(rgb(3,2,1), 1) # another built-in
+rgb(4,3,2)
 ```
 
 ### Access Component in Color
