@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 from abc import ABC, abstractmethod
 import copy
+import colorsys
 
 class Color(ABC):
 
@@ -10,12 +11,14 @@ class Color(ABC):
     def __rsub__(self, o):
         return self.__sub__(o);
 
+    @abstractmethod
     def get_dimensions(self):
         pass
 
     def normalised(self):
         pass
 
+    @abstractmethod
     def to(self, colorspace):
         import inspect
         if inspect.isclass(colorspace) and issubclass(colorspace, Color):
@@ -41,9 +44,11 @@ class RGB(Color):
     def get_dimensions(self):
         return [self.r,self.g,self.b] + ([self.a] if self.a else [])
 
-    def to(self, colorspace):
+    def to(self, colorspace, normalise=False):
         if not colorspace or isinstance(self, colorspace):
             return self
+        if colorspace is HSV:
+            return HSV(*colorsys.rgb_to_hsv(self.r,self.g,self.b))
 
     def __add__(self, o): 
         if isinstance(o, Color):
