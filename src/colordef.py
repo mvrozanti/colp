@@ -48,7 +48,8 @@ class RGB(Color):
         if not colorspace or isinstance(self, colorspace):
             return self
         if colorspace is HSV:
-            return HSV(*colorsys.rgb_to_hsv(self.r,self.g,self.b))
+            hsv_dimensions = colorsys.rgb_to_hsv(*self.get_dimensions())
+            return HSV(*hsv_dimensions)
 
     def __add__(self, o): 
         if isinstance(o, Color):
@@ -56,13 +57,17 @@ class RGB(Color):
             rr = o.r + self.r
             rg = o.g + self.g
             rb = o.b + self.b
-            return RGB(rr,rg,rb)
+            sum = RGB(rr,rg,rb)
+            return sum
         else:
             try:
                 return RGB(max(self.r + o, 0), max(self.g + o, 0), max(self.b + o, 0)) 
             except:
                 raise('Invalid addition')
 
+    def __eq__(self, o):
+        return self.r == o.r and self.g == o.g and self.b == o.b
+         
     def __sub__(self, o): 
         if isinstance(o, Color):
             pass
@@ -101,6 +106,13 @@ class HSV(Color):
         self.s = s
         self.v = v
         self.radians = radians
+
+    def __radd__(self, o):
+        return self.__add__(o)
+
+    def __add__(self, o):
+        if isinstance(o, RGB):
+            return o + self 
         
     def get_dimensions(self):
         return [self.h,self.s,self.v]
@@ -123,16 +135,12 @@ class HSV(Color):
                 _RGB = (X,0,C)
             elif 300 <= self.h < 360:
                 _RGB = (C,0,X)
-            import code
-            code.interact(local=globals().update(locals()) or globals())
-            return RGB((_RGB[0]+m)*255, (_RGB[1]+m)*255, (_RGB[2]+m)*255)
+            rgb = RGB((_RGB[0]+m), (_RGB[1]+m)*255, (_RGB[2]+m)*255)
+            assert 0 <= rgb.r <= 255
+            assert 0 <= rgb.g <= 255
+            assert 0 <= rgb.b <= 255
+            return rgb
         super().to(colorspace)
 
     def __repr__(self):
-        return 'hsv(%d,%d,%d)' % (self.h,self.s,self.v)
-
-if __name__ == '__main__':
-    color1 = RGB(2,2,2)
-    color2 = HEX('#ff0000')
-    code.interact(local=globals().update(locals()) or globals())
-    # code.interact(local=globals().update(locals()) or globals())
+        return 'hsv(%f,%f,%d)' % (self.h,self.s,self.v)
