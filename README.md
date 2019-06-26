@@ -1,7 +1,8 @@
 # colp
-![](https://i.imgur.com/WIAAZlR.png)
 
 The color processor
+
+![](https://i.imgur.com/WIAAZlR.png)
 
 # Supported Color Models
 - [ ] CMY[K]
