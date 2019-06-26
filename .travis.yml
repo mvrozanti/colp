@@ -8,3 +8,4 @@ python:
 - 3.6-dev
 script:
   - pytest test/test.py
+
