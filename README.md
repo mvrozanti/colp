@@ -109,10 +109,13 @@ rgb(4,3,2)
 - [ ] CMY[K]
 - [X] RGB/RGBA/HEX
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/RGB_Cube_Show_lowgamma_cutout_a.png/1280px-RGB_Cube_Show_lowgamma_cutout_a.png" alt="drawing" width="200"/>
+
 - [X] HSV=HSB=HSI=HSD
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/HSV_color_solid_cylinder_saturation_gray.png/1280px-HSV_color_solid_cylinder_saturation_gray.png" alt="drawing" width="200"/>
+
 - [ ] HSL
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/HSL_color_solid_cylinder_saturation_gray.png/1280px-HSL_color_solid_cylinder_saturation_gray.png" alt="drawing" width="200"/>
+
 - [ ] [CIE]LAB
 - [ ] YCbCr
 - [ ] YIQ
