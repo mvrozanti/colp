@@ -11,8 +11,6 @@ The color processor
 A `Color` is the only kind of object there is in `colp`. Intuitively, it is an abstract object. A `Color` can be _transformed_.
 Numbers can be expressed as floats and integers because of the difference in color models.
 
-### Web-safe colors
-
 # Color Components
 - Component value access is made by `x.y` where `x` is the `Color` in the target Color Model and `y` is the component or component abbreviation for that model
 
@@ -32,11 +30,6 @@ A member function call always appears as `Color.function`
 - brightness (without arguments)
 - angle (without arguments (what interval?))
 
-## Defining Custom Functions
-```
-
-```
-
 ### Image input/output
 
 # Conversion
@@ -54,7 +47,7 @@ hsv(0,100.0,100.0)
 ```
 
 # Basic Color Operators
-`-+*!`
+`-`,`+`,`*`,`//`,`/`,`!`,`~`,`^`,`**`
 
 # Doubts
 - Case-sensitive?
@@ -84,14 +77,6 @@ rgb(1,1,0)
 rgb(4,3,2)
 ```
 
-### Access Component in Color
-- Example: `#c01001.red` returns the number associated with the RED component in the the `Color`'s RGB model
-
-```
-
-```
-
-
 # Flags
 - default output color model? 
 - Modes
@@ -106,8 +91,6 @@ rgb(4,3,2)
 - [colormath-basics](http://www.laurenscorijn.com/articles/colormath-basics)
 
 # Supported Color Models
-- [ ] CMY[K]
-<img src="https://i.imgur.com//Bwi2zUi.png" alt="drawing" width="400"/>
 - [X] RGB/RGBA/HEX
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/RGB_Cube_Show_lowgamma_cutout_a.png/1280px-RGB_Cube_Show_lowgamma_cutout_a.png" alt="drawing" width="400"/>
 
@@ -116,6 +99,9 @@ rgb(4,3,2)
 
 - [ ] HSL
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/HSL_color_solid_cylinder_saturation_gray.png/1280px-HSL_color_solid_cylinder_saturation_gray.png" alt="drawing" width="400"/>
+
+- [ ] CMY[K]
+<img src="https://i.imgur.com//Bwi2zUi.png" alt="drawing" width="400"/>
 
 - [ ] [CIE]LAB
 <img src="https://upload.wikimedia.org/wikipedia/commons/0/06/CIELAB_color_space_top_view.png" alt="drawing" width="400"/>
