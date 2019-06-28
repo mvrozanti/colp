@@ -20,6 +20,8 @@ The color processor
 A `Color` is the only kind of object there is in `colp`. Intuitively, it is an abstract object. A `Color` can be _transformed_.
 Numbers can be expressed as floats and integers because of the difference in color models.
 
+### Web-safe colors
+
 # Color Components
 - Component value access is made by `x.y` where `x` is the `Color` in the target Color Model and `y` is the component or component abbreviation for that model
 

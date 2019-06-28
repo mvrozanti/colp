@@ -61,8 +61,9 @@ def test_negation_subtraction():
     assert is_named_blue
     assert -sub == get_names_dict('yellow') 
 
-    
-
+def test_web_safe():
+    ws_hex_red = HEX('#f00')
+    assert ws_hex_red == HEX('#ff0000')
 
 if __name__ == '__main__': # run tests
     for ptm in list(globals().keys()):

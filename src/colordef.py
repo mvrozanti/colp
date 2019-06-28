@@ -110,10 +110,11 @@ class HEX(RGB):
 
     def __init__(self, str_repr):
         if str_repr[0] == '#': str_repr = str_repr[1:]
-        self.r = int(str_repr[0:2], 16) / 255
-        self.g = int(str_repr[2:4], 16) / 255
-        self.b = int(str_repr[4:6], 16) / 255
-        self.a = int(str_repr[6:8], 16) / 255 if len(str_repr) > 6 else 0
+        ws = int(len(str_repr) == 3) + 1 # web-safe factor
+        self.r = int(str_repr[0//ws:2//ws] * ws, 16) / 255
+        self.g = int(str_repr[2//ws:4//ws] * ws, 16) / 255
+        self.b = int(str_repr[4//ws:6//ws] * ws, 16) / 255
+        self.a = int(str_repr[6//ws:8//ws] * ws, 16) / 255 if len(str_repr) > 6 else 0
 
     def __repr__(self):
         return 'HEX(#%02x%02x%02x)' % tuple(self.get_dimensions(normalise=False))
