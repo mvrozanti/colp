@@ -1,22 +1,10 @@
-# colp
-
-The color processor 
+# colp 
 [![Build Status](https://travis-ci.com/mvrozanti/colp.svg?token=Hrxne9dbhCC141HWAM1p&branch=colpy)](https://travis-ci.com/mvrozanti/colp)
 
-![](https://i.imgur.com/WIAAZlR.png)
+The color processor 
 
-# Supported Color Models
-- [ ] CMY[K]
-- [X] RGB/RGBA/HEX
-![RGB](https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/RGB_Cube_Show_lowgamma_cutout_a.png/1280px-RGB_Cube_Show_lowgamma_cutout_a.png)
-- [X] HSV=HSB=HSI=HSD
-![HSV](https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/HSV_color_solid_cylinder_saturation_gray.png/1280px-HSV_color_solid_cylinder_saturation_gray.png)
-- [ ] HSL
-![HSL](https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/HSL_color_solid_cylinder_saturation_gray.png/1280px-HSL_color_solid_cylinder_saturation_gray.png)
-![RGB HSV similarity](https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/HSL-HSV_hue_and_chroma.svg/800px-HSL-HSV_hue_and_chroma.svg.png)
-- [ ] [CIE]LAB
-- [ ] YCbCr
-- [ ] YIQ
+
+![](https://i.imgur.com/WIAAZlR.png)
 
 # Definitions
 
@@ -116,3 +104,16 @@ rgb(4,3,2)
 - [Color Models vs Color Spaces](https://programmingdesignsystems.com/color/color-models-and-color-spaces/index.html)
 - [rapidtables.com color converter (including formulas)](https://www.rapidtables.com/convert/color/index.html)
 - [colormath-basics](http://www.laurenscorijn.com/articles/colormath-basics)
+
+# Supported Color Models
+- [ ] CMY[K]
+- [X] RGB/RGBA/HEX
+![RGB](https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/RGB_Cube_Show_lowgamma_cutout_a.png/1280px-RGB_Cube_Show_lowgamma_cutout_a.png)
+- [X] HSV=HSB=HSI=HSD
+![HSV](https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/HSV_color_solid_cylinder_saturation_gray.png/1280px-HSV_color_solid_cylinder_saturation_gray.png)
+- [ ] HSL
+![HSL](https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/HSL_color_solid_cylinder_saturation_gray.png/1280px-HSL_color_solid_cylinder_saturation_gray.png)
+![RGB HSV similarity](https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/HSL-HSV_hue_and_chroma.svg/800px-HSL-HSV_hue_and_chroma.svg.png)
+- [ ] [CIE]LAB
+- [ ] YCbCr
+- [ ] YIQ
