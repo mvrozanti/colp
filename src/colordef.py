@@ -15,10 +15,7 @@ class Color(ABC):
         return self.__sub__(o);
 
     @abstractmethod
-    def get_dimensions(self, normalised=False):
-        pass
-
-    def normalised(self):
+    def get_dimensions(self, normalise=False):
         pass
 
     @abstractmethod
@@ -35,12 +32,15 @@ class Color(ABC):
             col = col.to(HSV)
         col.rotate(angle)
 
-    # def __neg__(self):
-    #     return self.__class__(*[-d for d in self.get_dimensions()])
+    def __neg__(self):
+        return self.__class__(*[-d for d in self.get_dimensions()])
 
     def __eq__(self, other):
-        if type(other) == type(self):
+        if other is None: return False
+        if isinstance(other, self.__class__) or isinstance(self, other.__class__):
             return self.get_dimensions() == other.get_dimensions()
+        else:
+            return other.to(self.__class__) == self
 
     def __repr__(self):
         return self.__class__.__name__  + str(tuple(self.get_dimensions()))
@@ -72,6 +72,13 @@ class RGB(Color):
         if colorspace is HSV:
             hsv_dimensions = colorsys.rgb_to_hsv(*self.get_dimensions(normalise=True))
             return HSV(*hsv_dimensions)
+
+    def __neg__(self):
+        o = copy.copy(self)
+        o.r = 1.0 - o.r
+        o.g = 1.0 - o.g
+        o.b = 1.0 - o.b
+        return o
 
     def __add__(self, o): 
         if isinstance(o, Color):
@@ -109,7 +116,7 @@ class HEX(RGB):
         self.a = int(str_repr[6:8], 16) / 255 if len(str_repr) > 6 else 0
 
     def __repr__(self):
-        return 'HEX(#%02x%02x%02x)' % (self.get_dimensions())
+        return 'HEX(#%02x%02x%02x)' % tuple(self.get_dimensions(normalise=False))
 
 class HSV(Color):
 
@@ -159,3 +166,26 @@ class HSV(Color):
             rgb = RGB((_RGB[0]+m), (_RGB[1]+m)*255, (_RGB[2]+m)*255)
             return rgb
         super().to(colorspace)
+
+def get_names_dict(name=None):
+    le_dict = {      
+            'white'   : HEX('#FFFFFF'),
+            'silver'  : HEX('#C0C0C0'),
+            'gray'    : HEX('#808080'),
+            'black'   : HEX('#000000'),
+            'red'     : HEX('#FF0000'),
+            'maroon'  : HEX('#800000'),
+            'yellow'  : HEX('#FFFF00'),
+            'olive'   : HEX('#808000'),
+            'lime'    : HEX('#00FF00'),
+            'green'   : HEX('#008000'),
+            'aqua'    : HEX('#00FFFF'),
+            'teal'    : HEX('#008080'),
+            'blue'    : HEX('#0000FF'),
+            'navy'    : HEX('#000080'),
+            'fuchsia' : HEX('#FF00FF'),
+            'purple'  : HEX('#800080'),
+            }
+    if name: return le_dict[name.lower()]
+    else: return le_dict
+

@@ -2,7 +2,7 @@
 import unittest
 import sys
 sys.path.append('..')
-from src.colordef import RGB,HSV,HEX
+from src.colordef import Color,RGB,HSV,HEX,get_names_dict
 
 def test_inter_color_sum():
     print('\n')
@@ -44,10 +44,25 @@ def test_color_conversion():
     sum = rgb_red + hsv_red
 
 def test_negation_subtraction():
+    print('\n')
     hsv_red = HSV(0,100,100)
     rgb_red = RGB(255,0,  0)
     rgb_black = hsv_red - rgb_red
     assert not any(rgb_black.get_dimensions())
+
+    rgb_magenta = RGB(255,0,255)
+    print(rgb_magenta)
+    print('-')
+    print(hsv_red)
+    print('_'*15)
+    sub = rgb_magenta - hsv_red
+    print(sub)
+    is_named_blue = sub == get_names_dict('blue') 
+    assert is_named_blue
+    assert -sub == get_names_dict('yellow') 
+
+    
+
 
 if __name__ == '__main__': # run tests
     for ptm in list(globals().keys()):
