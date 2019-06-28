@@ -107,6 +107,7 @@ rgb(4,3,2)
 
 # Supported Color Models
 - [ ] CMY[K]
+<img src="https://i.imgur.com//Bwi2zUi.png" alt="drawing" width="200"/>
 - [X] RGB/RGBA/HEX
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/RGB_Cube_Show_lowgamma_cutout_a.png/1280px-RGB_Cube_Show_lowgamma_cutout_a.png" alt="drawing" width="200"/>
 
