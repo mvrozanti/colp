@@ -43,7 +43,13 @@ def test_color_conversion():
     assert hsv_red.to(RGB) == rgb_red
     sum = rgb_red + hsv_red
 
-if __name__ == '__main__':
+def test_negation_subtraction():
+    hsv_red = HSV(0,100,100)
+    rgb_red = RGB(255,0,  0)
+    rgb_black = hsv_red - rgb_red
+    assert not any(rgb_black.get_dimensions())
+
+if __name__ == '__main__': # run tests
     for ptm in list(globals().keys()):
         if 'test' == ptm[:4]:
             eval(ptm + '()')

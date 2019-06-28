@@ -35,6 +35,9 @@ class Color(ABC):
             col = col.to(HSV)
         col.rotate(angle)
 
+    # def __neg__(self):
+    #     return self.__class__(*[-d for d in self.get_dimensions()])
+
     def __eq__(self, other):
         if type(other) == type(self):
             return self.get_dimensions() == other.get_dimensions()
@@ -85,11 +88,16 @@ class RGB(Color):
          
     def __sub__(self, o): 
         if isinstance(o, Color):
-            pass
-        try:
-            return RGB(max(self.r - o, 0), max(self.g - o, 0), max(self.b - o, 0)) 
-        except:
-            raise('Invalid subtraction')
+            o = copy.copy(o)
+            if isinstance(o, HSV):
+                o = o.to(RGB)
+            o.r = -o.r
+            o.g = -o.g
+            o.b = -o.b
+            o.a = -o.a
+            return self.__add__(o)
+        elif isinstance(o, (int,float)):
+            return self.__add__(-o)
 
 class HEX(RGB):
 
@@ -149,8 +157,5 @@ class HSV(Color):
             elif 300 <= h < 360:
                 _RGB = (C,0,X)
             rgb = RGB((_RGB[0]+m), (_RGB[1]+m)*255, (_RGB[2]+m)*255)
-            assert 0 <= rgb.r <= 255
-            assert 0 <= rgb.g <= 255
-            assert 0 <= rgb.b <= 255
             return rgb
         super().to(colorspace)
