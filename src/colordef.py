@@ -27,6 +27,38 @@ class Color(ABC):
         else:
             raise('Invalid colorspace')
 
+    def brightness(self, normalised=True):
+        if normalised:
+            return sum(self.get_dimensions()) / len(self.get_dimensions())
+
+    def darkness(self, normalised=True):
+        if normalised:
+            return 1 - self.brightness()
+
+    def brighter(self):
+        o = copy.copy(self)
+        return o + 1
+
+    def darker(self):
+        o = copy.copy(self)
+        return o - 1
+
+    def _inc_channel(self, chan_ix, factor=1):
+        o = copy.copy(self).to(RGB)
+        channels = o.get_dimensions()
+        channels[chan_ix] += factor
+        channels[chan_ix] %= 255
+        return RGB(*channels).to(self.__class__) 
+
+    def redder(self, factor=1):
+        return self._inc_channel(0, factor=factor)
+
+    def greener(self, factor=1):
+        return self._inc_channel(1, factor=factor)
+
+    def bluer(self, factor=1):
+        return self._inc_channel(2, factor=factor)
+
     def rotate(self, angle=1.):
         o = self
         original_class = o.__class__
@@ -36,7 +68,11 @@ class Color(ABC):
         return rotated_hsv.to(original_class)
 
     def __neg__(self):
-        return self.__class__(*[-d for d in self.get_dimensions()])
+        o = copy.copy(self).to(RGB)
+        channels = o.get_dimensions()
+        for i in len(channels):
+            channels[i] = 255 - channels[i]
+        return RGB(*channels).to(self.__class__)
 
     def __eq__(self, other):
         if other is None: return False
@@ -92,17 +128,23 @@ class RGB(Color):
         o.b = 1.0 - o.b
         return o
 
-    def __add__(self, o): 
+    def __add__(self, o, normalise=False): 
         if isinstance(o, Color):
             o = o.to(RGB)
             rr = o.r + self.r
             rg = o.g + self.g
             rb = o.b + self.b
             return RGB(rr,rg,rb) 
-        if isinstance(o, (int, float)):
-            return RGB(max(self.r + o, 0), \
-                    max(self.g + o, 0), \
-                    max(self.b + o, 0))
+        if isinstance(o, float) and normalise:
+            if 0 <= o <= 1:
+                return RGB(max(self.r + o, 0), \
+                        max(self.g + o, 0), \
+                        max(self.b + o, 0))
+        elif isinstance(o, int) and not normalise:
+            rgb = self.get_dimensions(normalise=False)
+            for i in range(len(rgb)):
+                rgb[i] += o
+            return RGB(*rgb)
         raise('Invalid addition')
          
     def __sub__(self, o): 

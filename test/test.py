@@ -58,8 +58,7 @@ def test_negation_subtraction():
     sub = rgb_magenta - hsv_red
     print(sub)
     is_named_blue = sub == by_name('blue') 
-    assert is_named_blue
-    assert -sub == by_name('yellow') 
+    assert is_named_blue and -sub == by_name('yellow') 
 
 def test_rotate():
     print('\n')

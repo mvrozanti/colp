@@ -236,6 +236,8 @@ class Calc(Parser):
     #     import sys
         # sys.exit(0)
 
-if __name__ == '__main__':
+def main():
     calc = Calc()
     calc.run()
+
+if __name__ == '__main__': main()
