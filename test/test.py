@@ -68,12 +68,6 @@ def test_rotate():
     named_colors = by_name() 
     for i in range(0,360,60):
         rotated = hsv_red.rotate(angle=i)
-        found = False
-        for k,v in named_colors.items():
-            if v == rotated:
-                found = True
-                print(k,v)
-        assert found
         is_rotated_named = rotated in list(named_colors.values())
         assert is_rotated_named
 
