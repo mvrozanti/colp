@@ -68,12 +68,29 @@ def test_rotate():
     named_colors = by_name() 
     for i in range(0,360,60):
         rotated = hsv_red.rotate(angle=i)
+        found = False
+        for k,v in named_colors.items():
+            if v == rotated:
+                found = True
+                print(k,v)
         is_rotated_named = rotated in list(named_colors.values())
         assert is_rotated_named
 
 def test_web_safe():
     ws_hex_red = HEX('#f00')
     assert ws_hex_red == HEX('#ff0000')
+
+def test__er_suffix_and_brightness():
+    print('\n')
+    print('brightness')
+    darkest_red   = RGB(0,0,0).redder()
+    darkest_green = RGB(0,0,0).greener()
+    darkest_blue  = RGB(0,0,0).bluer()
+    print(darkest_red)
+    print(darkest_green)
+    print(darkest_blue)
+    assert darkest_red.brightness() == darkest_green.brightness() == darkest_blue.brightness() > 0
+    # assert darkest_red.brightness() == darkest_green.brightness() == darkest_blue.brightness() < 0.1
 
 # if __name__ == '__main__': # run tests
 #     for ptm in list(globals().keys()):
