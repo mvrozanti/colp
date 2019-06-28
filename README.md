@@ -108,12 +108,12 @@ rgb(4,3,2)
 # Supported Color Models
 - [ ] CMY[K]
 - [X] RGB/RGBA/HEX
-![RGB](https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/RGB_Cube_Show_lowgamma_cutout_a.png/1280px-RGB_Cube_Show_lowgamma_cutout_a.png)
+![RGB](https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/RGB_Cube_Show_lowgamma_cutout_a.png/1280px-RGB_Cube_Show_lowgamma_cutout_a.png =250x)
 - [X] HSV=HSB=HSI=HSD
-![HSV](https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/HSV_color_solid_cylinder_saturation_gray.png/1280px-HSV_color_solid_cylinder_saturation_gray.png)
+![HSV](https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/HSV_color_solid_cylinder_saturation_gray.png/1280px-HSV_color_solid_cylinder_saturation_gray.png =250x)
 - [ ] HSL
 ![HSL](https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/HSL_color_solid_cylinder_saturation_gray.png/1280px-HSL_color_solid_cylinder_saturation_gray.png)
-![RGB HSV similarity](https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/HSL-HSV_hue_and_chroma.svg/800px-HSL-HSV_hue_and_chroma.svg.png)
+![RGB HSV similarity](https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/HSL-HSV_hue_and_chroma.svg/800px-HSL-HSV_hue_and_chroma.svg.png =250x)
 - [ ] [CIE]LAB
 - [ ] YCbCr
 - [ ] YIQ
