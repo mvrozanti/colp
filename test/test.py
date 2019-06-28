@@ -2,7 +2,7 @@
 import unittest
 import sys
 sys.path.append('..')
-from src.colordef import Color,RGB,HSV,HEX,get_names_dict
+from src.colordef import Color,RGB,HSV,HEX,by_name
 
 def test_inter_color_sum():
     print('\n')
@@ -57,15 +57,31 @@ def test_negation_subtraction():
     print('_'*15)
     sub = rgb_magenta - hsv_red
     print(sub)
-    is_named_blue = sub == get_names_dict('blue') 
+    is_named_blue = sub == by_name('blue') 
     assert is_named_blue
-    assert -sub == get_names_dict('yellow') 
+    assert -sub == by_name('yellow') 
+
+def test_rotate():
+    print('\n')
+    print('rotate')
+    hsv_red = HSV(0,100,100)
+    named_colors = by_name() 
+    for i in range(0,360,60):
+        rotated = hsv_red.rotate(angle=i)
+        found = False
+        for k,v in named_colors.items():
+            if v == rotated:
+                found = True
+                print(k,v)
+        assert found
+        is_rotated_named = rotated in list(named_colors.values())
+        assert is_rotated_named
 
 def test_web_safe():
     ws_hex_red = HEX('#f00')
     assert ws_hex_red == HEX('#ff0000')
 
-if __name__ == '__main__': # run tests
-    for ptm in list(globals().keys()):
-        if 'test' == ptm[:4]:
-            eval(ptm + '()')
+# if __name__ == '__main__': # run tests
+#     for ptm in list(globals().keys()):
+#         if 'test' == ptm[:4]:
+#             eval(ptm + '()')
