@@ -3,8 +3,8 @@ from abc import ABC, abstractmethod
 import copy
 import colorsys
 
-def detect_normalised(normalised):
-    return all([type(n) == float and 0 <= n <= 1 for n in normalised])
+def detect_normalised(may_be_normalised):
+    return all([type(n) == float and 0 <= n <= 1 for n in may_be_normalised])
 
 class Color(ABC):
 
@@ -27,24 +27,25 @@ class Color(ABC):
         else:
             raise('Invalid colorspace')
 
-    def brightness(self, normalised=True):
-        if normalised:
-            return sum(self.get_dimensions()) / len(self.get_dimensions())
+    def brightness(self, normalise=True):
+        if normalise:
+            return sum(self.get_dimensions(normalise=True)) / len(self.get_dimensions())
 
-    def darkness(self, normalised=True):
-        if normalised:
+    def darkness(self, normalise=True):
+        if normalise:
             return 1 - self.brightness()
 
-    def brighter(self):
-        o = copy.copy(self)
-        return o + 1
+    def brighter(self, factor=1):
+        o = self.to(RGB)
+        for i in range(len(self.get_dimensions())):
+            o = o._inc_channel(i, factor=factor)
+        return o
 
     def darker(self):
-        o = copy.copy(self)
-        return o - 1
+        return self.brighter(factor=-1)
 
     def _inc_channel(self, chan_ix, factor=1):
-        o = copy.copy(self).to(RGB)
+        o = self.to(RGB)
         channels = o.get_dimensions()
         channels[chan_ix] += factor
         channels[chan_ix] %= 255

@@ -2,7 +2,7 @@
 import unittest
 import sys
 sys.path.append('..')
-from src.colordef import Color,RGB,HSV,HEX,by_name
+from colp import Color,RGB,HSV,HEX,by_name
 
 def test_inter_color_sum():
     print('\n')
@@ -88,8 +88,8 @@ def test__er_suffix_and_brightness():
     print(darkest_red)
     print(darkest_green)
     print(darkest_blue)
-    assert darkest_red.brightness() == darkest_green.brightness() == darkest_blue.brightness() > 0
-    # assert darkest_red.brightness() == darkest_green.brightness() == darkest_blue.brightness() < 0.1
+    # assert darkest_red.brightness() == darkest_green.brightness() == darkest_blue.brightness() > 0
+    assert darkest_red.brightness() == darkest_green.brightness() == darkest_blue.brightness() == 1/(255*3)
 
 # if __name__ == '__main__': # run tests
 #     for ptm in list(globals().keys()):

@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 import ply.lex as lex
 import ply.yacc as yacc
-import colormap
 from .conversion import Color, RGB, HEX, HSV
 import os
 

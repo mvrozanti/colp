@@ -1,0 +1,18 @@
+#!/usr/bin/env python
+from colp import Color,HSV,HEX,RGB,by_name,detect_normalised
+import code
+import argparse
+banner = """
+\033[95m┌─┐┌─┐┬  ┬─┐
+\033[92m│  │ ││  │─┘
+\033[93m└─┘┘─┘┆─┘┆   \x1b[6;30;42mthe color processor\x1b[0m
+"""
+if __name__ == '__main__': 
+    parser = argparse.ArgumentParser(prog='colp', description='Color Processor')
+    parser.add_argument('-i'         , '--interactive'               , action='store_true'   , default=True                                , help='interactive mode')
+    parser.add_argument('-l'         , '--load-script'               , metavar='SCRIPT_FILE' , help='load script with transform function')
+    parser.add_argument('-I'         , '--inplace'                   , action='store_true'   , help='load script with transform')
+    parser.add_argument('INPUT_FILE' , nargs='*', help='operate on input file')
+
+    args = parser.parse_args()
+    code.interact(banner=banner, local=globals().update(locals()) or globals())
