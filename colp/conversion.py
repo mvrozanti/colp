@@ -45,7 +45,7 @@ class Color(ABC):
         o = self.to(RGB)
         channels = o.get_dimensions()
         channels[chan_ix] += factor
-        channels[chan_ix] %= 255
+        channels[chan_ix] %= 256
         return RGB(*channels).to(self.__class__) 
 
     def redder(self, factor=1):

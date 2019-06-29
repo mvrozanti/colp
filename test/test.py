@@ -85,10 +85,12 @@ def test__er_suffix_and_brightness():
     darkest_red   = RGB(0,0,0).redder()
     darkest_green = RGB(0,0,0).greener()
     darkest_blue  = RGB(0,0,0).bluer()
+    lightest_blue = cyan = RGB(254,255,255);
     print(darkest_red)
     print(darkest_green)
     print(darkest_blue)
     # assert darkest_red.brightness() == darkest_green.brightness() == darkest_blue.brightness() > 0
+    assert -darkest_red == lightest_blue
     assert darkest_red.brightness() == darkest_green.brightness() == darkest_blue.brightness() == 1/(255*3)
 
 # if __name__ == '__main__': # run tests
