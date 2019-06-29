@@ -14,7 +14,7 @@ setuptools.setup(
      long_description_content_type="text/markdown",
      url="https://github.com/mvrozanti/colp",
      packages=setuptools.find_packages(),
-     scripts=['colpy/colp'],
+     scripts=['colp'],
      classifiers=[
          "Development Status :: 3 - Alpha",
          "Topic :: Internet",
