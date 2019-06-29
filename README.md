@@ -38,39 +38,32 @@ hsv(0,100.0,100.0)
 # Basic Color Operators
 `-`,`+`,`*`,`//`,`/`,`!`,`~`,`^`,'|',`**`
 
-# Doubts
-- Case-sensitive?
-- Comments (`;`|`%`|`#`)
-- String delimiter and escaping
-- Color Space boundaries
-
-# Real use-cases
+# 
 ```
-> rgb(10,20,30).a == 0 # comparisons
+┌─┐┌─┐┬  ┬─┐
+│  │ ││  │─┘
+└─┘┘─┘┆─┘┆   the color processor
+
+>>> RGB(1,1,1)
+RGB(1, 1, 1)
+>>> a = _
+>>> a = a.brighter()
+>>> a
+RGB(2, 2, 2)
+>>> a = a.redder()
+>>> a
+RGB(3, 2, 2)
+>>> a = a.rotate(3.)
+>>> a
+RGB(2, 1, 1)
+>>> by_name('red') == a
+False
+>>> by_name('red') == RGB(255,0,0)
 True
-> rgb(10,20,30).r # accessing components
-10
-> rgb(10,20,30).r + 1 # simple integer operations
-11
-> rotate(rgb(10,20,30), -1.) # a built-in function
-rgb(x,y,z)
-> hex(rgb(255,0,0)) # conversions
-hex('#ff0000')
-> hsv(hex('#ff0000'))
-hsv(0,100.0,100.0)
-> rgb(hex('#ff0000')) 
-rgb(255,0,0)
-> rgb(1,0,0) + rgb(0,1,0) # sum colors
-rgb(1,1,0)
-> saturate(rgb(3,2,1), 1) # another built-in
-rgb(4,3,2)
+>>> -a
+RGB(252, 253, 253)
+>>>
 ```
-
-# Flags
-- default output color model? 
-- Modes
-  - interpret
-  - transform
 
 # Good Resources
 - [HSV Color Specification](https://stat.ethz.ch/R-manual/R-devel/library/grDevices/html/hsv.html)
