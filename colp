@@ -1,1 +1,3 @@
-src/colp.py
+#!/usr/bin/env python
+from colpy.lang import main
+if __name__ == '__main__': main()

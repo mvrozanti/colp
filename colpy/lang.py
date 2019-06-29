@@ -1,20 +1,19 @@
 #!/usr/bin/env python
-
 import ply.lex as lex
 import ply.yacc as yacc
 import colormap
-from colordef import Color, RGB, HEX, HSV
+from .conversion import Color, RGB, HEX, HSV
 import os
 
 MODES = {
     'hex'   : HEX,
     'rgb'   : RGB,
-    'rgba'  : None,
+    'rgba'  : RGB,
     'yuv'   : None,
     'cmy'   : None,
     'cmyk'  : None,
     'float' : None,
-    'hsv'   : None,
+    'hsv'   : HSV,
     'hsl'   : None,
     'hls'   : None,
     }

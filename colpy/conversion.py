@@ -415,4 +415,3 @@ def by_name(name=None):
     le_dict = dict(x11_spec, **html_spec)
     if name: return le_dict[name.lower()]
     else: return le_dict
-
