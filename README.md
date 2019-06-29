@@ -6,19 +6,8 @@ The color processor
 
 ![](https://i.imgur.com/WIAAZlR.png)
 
-# Definitions
-
-A `Color` is the only kind of object there is in `colp`. Intuitively, it is an abstract object. A `Color` can be _transformed_.
-Numbers can be expressed as floats and integers because of the difference in color models.
-
-# Color Components
-- Component value access is made by `x.y` where `x` is the `Color` in the target Color Model and `y` is the component or component abbreviation for that model
-
 # Constants
 - See resource no. 2 (X11 + HTML 4.01 spec)
-
-# Member Functions
-A member function call always appears as `Color.function` 
 
 ## Transformative Operations
 - lighten/darken

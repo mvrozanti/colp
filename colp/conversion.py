@@ -8,12 +8,6 @@ def detect_normalised(may_be_normalised):
 
 class Color(ABC):
 
-    def __radd__(self, o):
-        return self.__add__(o);
-
-    def __rsub__(self, o):
-        return self.__sub__(o);
-
     @abstractmethod
     def get_dimensions(self, normalise=False):
         pass
@@ -26,6 +20,9 @@ class Color(ABC):
             clone.__class__ = colorspace
         else:
             raise('Invalid colorspace')
+
+    def is_gray(self):
+        return len(set(self.to(RGB).get_dimensions())) == 1
 
     def brightness(self, normalise=True):
         if normalise:
@@ -68,6 +65,12 @@ class Color(ABC):
         rotated_hsv = o.rotate(angle)
         return rotated_hsv.to(original_class)
 
+    def __radd__(self, o):
+        return self.__add__(o);
+
+    def __rsub__(self, o):
+        return self.__sub__(o);
+
     def __neg__(self):
         o = copy.copy(self).to(RGB)
         channels = o.get_dimensions()
@@ -99,13 +102,6 @@ class RGB(Color):
         if not detect_normalised([a]):
             self.a /= 255;
 
-    def __hash__(self):
-        r,g,b = self.get_dimensions()
-        rgb = r
-        rgb = (rgb << 8) + g
-        rgb = (rgb << 8) + b
-        return rgb
-
     def get_dimensions(self, normalise=False):
         if normalise:
             return [self.r,self.g,self.b] + ([self.a] if self.a else [])
@@ -121,6 +117,13 @@ class RGB(Color):
             return HSV(*hsv_dimensions)
         if colorspace is HEX:
             return HEX('#%02x%02x%02x' % tuple(self.get_dimensions()))
+
+    def __hash__(self):
+        r,g,b = self.get_dimensions()
+        rgb = r
+        rgb = (rgb << 8) + g
+        rgb = (rgb << 8) + b
+        return rgb
 
     def __neg__(self):
         o = copy.copy(self)
