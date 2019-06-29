@@ -12,7 +12,6 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(prog='colp', description='Color Processor')
     parser.add_argument('-I'  , '--inplace'     , action='store_true'   , help='load script with transform')
     parser.add_argument('-i'  , '--interactive' , action='store_true'   , default=True                                                      , help='interactive mode')
-    parser.add_argument('-c'  , '--command'     , metavar='command'     , default=True                                                      , help='run command')
     parser.add_argument('-n'  , '--no-banner'   , action='store_true'   , default=False                                                     , help='don\'t show  banner on interactive mode')
     parser.add_argument('-f'  , '--input-file'  , metavar='INPUT_FILE'  , help='load variables from file or stdin (-)')
     parser.add_argument('-l'  , '--load-script' , metavar='SCRIPT_FILE' , help='load script with transform function from file or stdin(-)')
