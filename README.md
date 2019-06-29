@@ -90,16 +90,16 @@ RGB(252, 253, 253)
 |      |<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/RGB_Cube_Show_lowgamma_cutout_a.png/1280px-RGB_Cube_Show_lowgamma_cutout_a.png" alt="drawing" width="400"/>|
 |✓     |      HSV=HSB=HSI=HSD: |
 |      |<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/HSV_color_solid_cylinder_saturation_gray.png/1280px-HSV_color_solid_cylinder_saturation_gray.png" alt="drawing" width="400"/>|
-|      | HSL:|
+|[ ]   | HSL:|
 |      |<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/HSL_color_solid_cylinder_saturation_gray.png/1280px-HSL_color_solid_cylinder_saturation_gray.png" alt="drawing" width="400"/>|
-|      |  CMY[K]|
+|[ ]   |  CMY[K]|
 |      | <img src="https://i.imgur.com//Bwi2zUi.png" alt="drawing" width="400"/>|
-|      | [CIE]LAB|
+|[ ]   | [CIE]LAB|
 |      | <img src="https://upload.wikimedia.org/wikipedia/commons/0/06/CIELAB_color_space_top_view.png" alt="drawing" width="400"/>|
-|      |  YCbCr |
+|[ ]   |  YCbCr |
 |      | <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/YCbCr-CbCr_Scaled_Y50.png/1024px-YCbCr-CbCr_Scaled_Y50.png" alt="drawing" width="400"/>|
-|      | YIQ|
+|[ ]   | YIQ|
 |      |<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/YIQ_IQ_plane.svg/1024px-YIQ_IQ_plane.svg.png" alt="drawing" width="400"/>|
-|      | YUV|
+|[ ]   | YUV|
 |      |<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/YUV_UV_plane.svg/1024px-YUV_UV_plane.svg.png" alt="drawing" width="400"/>|
 
