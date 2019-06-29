@@ -12,7 +12,7 @@ if __name__ == '__main__':
     parser.add_argument('-I'         , '--inplace'     , action='store_true'           , help='load script with transform')
     parser.add_argument('-i'         , '--interactive' , action='store_true'           , default=True                                , help='interactive mode')
     parser.add_argument('-l'         , '--load-script' , metavar='SCRIPT_FILE'         , help='load script with transform function')
-    parser.add_argument('INPUT_FILE' , nargs='*'       , help='operate on input file')
+    parser.add_argument('INPUT_FILE' , nargs='*'       , help='operate on file or stdin (-)')
 
     args = parser.parse_args()
     code.interact(banner=banner, local=globals().update(locals()) or globals())
