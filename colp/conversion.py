@@ -174,6 +174,11 @@ class HEX(RGB):
         self.b = int(str_repr[4//ws:6//ws] * ws, 16) / 255
         self.a = int(str_repr[6//ws:8//ws] * ws, 16) / 255 if len(str_repr) > 6 else 0
 
+    def to(self, colorspace):
+        if colorspace == RGB:
+            return RGB(*self.get_dimensions(normalise=True))
+        return super().to(colorspace)
+
     def __repr__(self):
         return 'HEX(#%02x%02x%02x)' % tuple(self.get_dimensions(normalise=False))
 

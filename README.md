@@ -21,15 +21,18 @@ This tool is inspired on various processing tools such as awk, sed and imagemagi
 # Basic Color Operators
 |Status|Operator|
 |------|--------|
-|✓     |  `-`   |
-|✓     |  `+`   |
+|  ✓   |  `-`   |
+|  ✓   |  `+`   |
 |      |  `*`   |
 |      |  `/`   |
 |      |  `//`  |
 |      |  `!`   |
 |      |  `~`   |
 |      |  `^`   |
+|      |  `|`   |
+|      |  `&`   |
 |      |  `**`  |
+|      |  `%`   |
 
 # Example Usage
 
@@ -60,22 +63,20 @@ RGB(252, 253, 253)
 >>>
 ```
 
-## Pipe commands in!
+## Or pipe commands in
 
 ```
-$ echo 'RGB(25,200,23).rotate(3.)' | colp -n
+$ echo "HEX('#ff0000').rotate(15.).to(RGB)" | colp -n
 
-RGB(23, 198, 29)
+RGB(255, 63, 0)
 
 ```
 
-# Constants
-- See resource no. 2 (X11 + HTML 4.01 spec)
-
+# Named Constants
+- [X11 + HTML 4.01 spec](https://en.wikipedia.org/wiki/Web_colors)
 
 # Good Resources
 - [HSV Color Specification](https://stat.ethz.ch/R-manual/R-devel/library/grDevices/html/hsv.html)
-- [X11 + HTML 4.01 spec](https://en.wikipedia.org/wiki/Web_colors)
 - [Color Models vs Color Spaces](https://programmingdesignsystems.com/color/color-models-and-color-spaces/index.html)
 - [rapidtables.com color converter (including formulas)](https://www.rapidtables.com/convert/color/index.html)
 - [colormath-basics](http://www.laurenscorijn.com/articles/colormath-basics)
@@ -84,19 +85,19 @@ RGB(23, 198, 29)
 |Status|Supported Color Models|
 |------|---------------|
 |✓     |      RGB/RGBA/HEX:    |
-|      |<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/RGB_Cube_Show_lowgamma_cutout_a.png/1280px-RGB_Cube_Show_lowgamma_cutout_a.png" alt="drawing" width="400"/>|
+|      |<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/RGB_Cube_Show_lowgamma_cutout_a.png/1280px-RGB_Cube_Show_lowgamma_cutout_a.png" alt="drawing" width="300"/>|
 |✓     |      HSV=HSB=HSI=HSD: |
-|      |<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/HSV_color_solid_cylinder_saturation_gray.png/1280px-HSV_color_solid_cylinder_saturation_gray.png" alt="drawing" width="400"/>|
+|      |<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/HSV_color_solid_cylinder_saturation_gray.png/1280px-HSV_color_solid_cylinder_saturation_gray.png" alt="drawing" width="300"/>|
 |[ ]   | HSL:|
-|      |<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/HSL_color_solid_cylinder_saturation_gray.png/1280px-HSL_color_solid_cylinder_saturation_gray.png" alt="drawing" width="400"/>|
+|      |<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/HSL_color_solid_cylinder_saturation_gray.png/1280px-HSL_color_solid_cylinder_saturation_gray.png" alt="drawing" width="300"/>|
 |[ ]   |  CMY[K]|
-|      | <img src="https://i.imgur.com//Bwi2zUi.png" alt="drawing" width="400"/>|
+|      | <img src="https://i.imgur.com//Bwi2zUi.png" alt="drawing" width="300"/>|
 |[ ]   | [CIE]LAB|
-|      | <img src="https://upload.wikimedia.org/wikipedia/commons/0/06/CIELAB_color_space_top_view.png" alt="drawing" width="400"/>|
+|      | <img src="https://upload.wikimedia.org/wikipedia/commons/0/06/CIELAB_color_space_top_view.png" alt="drawing" width="300"/>|
 |[ ]   |  YCbCr |
-|      | <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/YCbCr-CbCr_Scaled_Y50.png/1024px-YCbCr-CbCr_Scaled_Y50.png" alt="drawing" width="400"/>|
+|      | <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/YCbCr-CbCr_Scaled_Y50.png/1024px-YCbCr-CbCr_Scaled_Y50.png" alt="drawing" width="300"/>|
 |[ ]   | YIQ|
-|      |<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/YIQ_IQ_plane.svg/1024px-YIQ_IQ_plane.svg.png" alt="drawing" width="400"/>|
+|      |<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/YIQ_IQ_plane.svg/1024px-YIQ_IQ_plane.svg.png" alt="drawing" width="300"/>|
 |[ ]   | YUV|
-|      |<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/YUV_UV_plane.svg/1024px-YUV_UV_plane.svg.png" alt="drawing" width="400"/>|
+|      |<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/YUV_UV_plane.svg/1024px-YUV_UV_plane.svg.png" alt="drawing" width="300"/>|
 
