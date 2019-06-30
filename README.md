@@ -12,7 +12,7 @@ The color processor
 ### Objective
 
 This tool is inspired on various processing tools such as awk, sed and imagemagick. There is no processing library for single color operations, be it interactively or not. 
-`colp` attempts to solve that. It supports a number of color models (specified later in this README). The goal is to have the ability to script and automate a 
+`colp` attempts to solve that. It supports a number of color models (specified later in this README). The goal is to have the ability to script and automate any algorithmic color transformation.
 
 ### Installation
 
@@ -54,6 +54,45 @@ $ echo "HEX('#ff0000').rotate(15.).to(RGB)" | colp -n
 
 RGB(255, 63, 0)
 
+```
+
+#### Usage from Python script
+
+```
+from colp import *
+print(RGB(1,2,3).to(HEX))
+
+```
+
+outputs:
+
+```
+HEX('#010203')
+```
+
+### Formal Parameters
+
+```
+usage: colp [-h] [-I] [-i] [-c command] [-n] [-f INPUT_FILE] [-l SCRIPT_FILE]
+            [VAR [VAR ...]]
+
+Color Processor
+
+positional arguments:
+  VAR                   variable
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -I, --inplace         load script with transform
+  -i, --interactive     interactive mode
+  -c command, --command command
+                        run command
+  -n, --no-banner       don't show banner on interactive mode
+  -f INPUT_FILE, --input-file INPUT_FILE
+                        load variables from file or stdin (-)
+  -l SCRIPT_FILE, --load-script SCRIPT_FILE
+                        load script with transform function from file or
+                        stdin(-)
 ```
 
 ### Basic Color Operators
