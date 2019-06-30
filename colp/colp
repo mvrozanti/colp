@@ -33,4 +33,7 @@ if __name__ == '__main__':
         exec(c)
 
     if args.interactive:
-        code.interact(banner='' if args.no_banner else banner, local=globals().update(locals()) or globals())
+        code.interact(banner='' if args.no_banner else banner, \
+                local=globals().update(locals()) or globals(), \
+                readfunc=lambda x:input('' if not sys.stdin.isatty() else '>'), \
+                exitmsg='')

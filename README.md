@@ -1,23 +1,22 @@
 # colp 
 [![Build Status](https://travis-ci.com/mvrozanti/colp.svg?token=Hrxne9dbhCC141HWAM1p&branch=colpy)](https://travis-ci.com/mvrozanti/colp)
+[![PyPI](https://img.shields.io/pypi/v/colp.svg)](https://pypi.org/project/colp/)
+
 
 The color processor 
 
 
 ![](https://i.imgur.com/WIAAZlR.png)
 
-# Constants
-- See resource no. 2 (X11 + HTML 4.01 spec)
 
-## Transformative Operations
-- lighten/darken
-- brightness (without arguments)
-- rotate (depends on floating argument (what interval?))
-- redder/greener/bluer (with arguments or without arguments, with the latter minimally dislocating the Color in the RGB Color Space)
+# Objective
 
-## Descriptive Operations
-- brightness (without arguments)
-- angle (without arguments (what interval?))
+This tool is inspired on various processing tools such as awk, sed and imagemagick. There is no processing library for single color operations, be it interactively or not. 
+`colp` attempts to solve that. It supports a number of color models (specified later in this README). The goal is to have the ability to script and automate a 
+
+# Installation
+
+`pip install colp`
 
 # Basic Color Operators
 |Status|Operator|
@@ -33,6 +32,8 @@ The color processor
 |      |  `**`  |
 
 # Example Usage
+
+## Interactively operate on colors
 
 ```
 $ colp 'a=RGB(1,1,1)' # optionally load a color to memory
@@ -58,6 +59,19 @@ True
 RGB(252, 253, 253)
 >>>
 ```
+
+## Pipe commands in!
+
+```
+$ echo 'RGB(25,200,23).rotate(3.)' | colp -n
+
+RGB(23, 198, 29)
+
+```
+
+# Constants
+- See resource no. 2 (X11 + HTML 4.01 spec)
+
 
 # Good Resources
 - [HSV Color Specification](https://stat.ethz.ch/R-manual/R-devel/library/grDevices/html/hsv.html)
