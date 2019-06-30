@@ -29,22 +29,22 @@ $ colp 'a=RGB(1,1,1)' # optionally load a color to memory
 │  │ ││  │─┘
 └─┘┘─┘┆─┘┆   the color processor
 
->>> a = a.brighter() # increment all channels
->>> a
+> a = a.brighter() # increment all channels
+> a
 RGB(2, 2, 2)
->>> a = a.redder() # single-channel increment
->>> a
+> a = a.redder() # single-channel increment
+> a
 RGB(3, 2, 2)
->>> a = a.rotate(3.) # rotate in HSV space
->>> a
+> a = a.rotate(3.) # rotate in HSV space
+> a
 RGB(2, 1, 1)
->>> by_name('red') == a # compare
+> by_name('red') == a # compare
 False
->>> by_name('red') == RGB(255,0,0)
+> by_name('red') == RGB(255,0,0)
 True
->>> -a # invert color
+> -a # invert color
 RGB(252, 253, 253)
->>>
+>
 ```
 
 #### Or pipe commands in
