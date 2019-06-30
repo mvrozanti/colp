@@ -9,34 +9,18 @@ The color processor
 ![](https://i.imgur.com/WIAAZlR.png)
 
 
-# Objective
+### Objective
 
 This tool is inspired on various processing tools such as awk, sed and imagemagick. There is no processing library for single color operations, be it interactively or not. 
 `colp` attempts to solve that. It supports a number of color models (specified later in this README). The goal is to have the ability to script and automate a 
 
-# Installation
+### Installation
 
 `pip install colp`
 
-# Basic Color Operators
-|Status|Operator|
-|------|--------|
-|  ✓   |  `-`   |
-|  ✓   |  `+`   |
-|      |  `*`   |
-|      |  `/`   |
-|      |  `//`  |
-|      |  `!`   |
-|      |  `~`   |
-|      |  `^`   |
-|      |  `|`   |
-|      |  `&`   |
-|      |  `**`  |
-|      |  `%`   |
+### Example Usage
 
-# Example Usage
-
-## Interactively operate on colors
+#### Interactively operate on colors
 
 ```
 $ colp 'a=RGB(1,1,1)' # optionally load a color to memory
@@ -63,7 +47,7 @@ RGB(252, 253, 253)
 >>>
 ```
 
-## Or pipe commands in
+#### Or pipe commands in
 
 ```
 $ echo "HEX('#ff0000').rotate(15.).to(RGB)" | colp -n
@@ -72,10 +56,28 @@ RGB(255, 63, 0)
 
 ```
 
-# Named Constants
-- [X11 + HTML 4.01 spec](https://en.wikipedia.org/wiki/Web_colors)
+### Basic Color Operators
+|Status|Operator|
+|------|--------|
+|  ✓   |  `-`   |
+|  ✓   |  `+`   |
+|      |  `*`   |
+|      |  `/`   |
+|      |  `//`  |
+|      |  `!`   |
+|      |  `~`   |
+|      |  `^`   |
+|      |  `|`   |
+|      |  `&`   |
+|      |  `**`  |
+|      |  `%`   |
 
-# Good Resources
+
+### Named Constants
+- [HTML 4.01 specification](https://en.wikipedia.org/wiki/Web_colors#HTML_color_names)
+- [X11 color names](https://en.wikipedia.org/wiki/Web_colors#)
+
+### Good Resources
 - [HSV Color Specification](https://stat.ethz.ch/R-manual/R-devel/library/grDevices/html/hsv.html)
 - [Color Models vs Color Spaces](https://programmingdesignsystems.com/color/color-models-and-color-spaces/index.html)
 - [rapidtables.com color converter (including formulas)](https://www.rapidtables.com/convert/color/index.html)
