@@ -19,22 +19,6 @@ The color processor
 - brightness (without arguments)
 - angle (without arguments (what interval?))
 
-### Image input/output
-
-# Conversion
-Any one `Color` can be represented in any Color Model.
-
-```
-> rotate(rgb(10,20,30))
-rgb(x,y,z)
-> hex(rgb(255,0,0))
-hex(#ff0000)
-> rgb('#ff0000')
-rgb(255,0,0)
-> hsv('#ff0000')
-hsv(0,100.0,100.0)
-```
-
 # Basic Color Operators
 |Status|Operator|
 |------|--------|
@@ -51,27 +35,26 @@ hsv(0,100.0,100.0)
 # Example Usage
 
 ```
+$ colp 'a=RGB(1,1,1)' # optionally load a color to memory
+
 ┌─┐┌─┐┬  ┬─┐
 │  │ ││  │─┘
 └─┘┘─┘┆─┘┆   the color processor
 
->>> RGB(1,1,1)
-RGB(1, 1, 1)
->>> a = _
->>> a = a.brighter()
+>>> a = a.brighter() # increment all channels
 >>> a
 RGB(2, 2, 2)
->>> a = a.redder()
+>>> a = a.redder() # single-channel increment
 >>> a
 RGB(3, 2, 2)
->>> a = a.rotate(3.)
+>>> a = a.rotate(3.) # rotate in HSV space
 >>> a
 RGB(2, 1, 1)
->>> by_name('red') == a
+>>> by_name('red') == a # compare
 False
 >>> by_name('red') == RGB(255,0,0)
 True
->>> -a
+>>> -a # invert color
 RGB(252, 253, 253)
 >>>
 ```

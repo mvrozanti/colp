@@ -29,5 +29,8 @@ if __name__ == '__main__':
     if args.load_script:
         loaded_script = readlines(args.load_script)
 
+    for c in args.VAR:
+        exec(c)
+
     if args.interactive:
         code.interact(banner='' if args.no_banner else banner, local=globals().update(locals()) or globals())
