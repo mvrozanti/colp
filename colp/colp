@@ -32,8 +32,12 @@ if __name__ == '__main__':
     for c in args.VAR:
         exec(c)
 
+    is_tty = sys.stdin.isatty()
+
     if args.interactive:
+        if is_tty:
+            import readline
         code.interact(banner='' if args.no_banner else banner, \
                 local=globals().update(locals()) or globals(), \
-                readfunc=lambda x:input('' if not sys.stdin.isatty() else '> '), \
+                readfunc=lambda x:input('> ' if is_tty else ''), \
                 exitmsg='')
