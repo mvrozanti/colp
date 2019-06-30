@@ -180,7 +180,7 @@ class HEX(RGB):
         return super().to(colorspace)
 
     def __repr__(self):
-        return 'HEX(#%02x%02x%02x)' % tuple(self.get_dimensions(normalise=False))
+        return "HEX('#%02x%02x%02x')" % tuple(self.get_dimensions(normalise=False))
 
 class HSV(Color):
 
