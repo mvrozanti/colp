@@ -36,6 +36,7 @@ def test_color_conversion():
     rgb_red  = RGB(255,0,0)
     rgb_blue = RGB(0,0,255)
     hsv_red = rgb_red.to(HSV)
+    assert rgb_red.to(HEX).to(RGB) is not None
     assert hsv_red.get_dimensions(normalise=True)  == [0.0,1.0,1.0]
     assert hsv_red.get_dimensions(normalise=False) == [0,100,100]
     hsv_red = HSV(0,100,100)
