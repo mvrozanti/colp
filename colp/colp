@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-from colp import Color,HSV,HEX,RGB,by_name,detect_normalised
+from colp import Color,HSV,HEX,RGB,by_name,detect_normalised #,get_last_processed
 import argparse
 import code
 import os.path as op
@@ -13,6 +13,9 @@ banner = """
 if __name__ == '__main__': 
     parser = argparse.ArgumentParser(prog='colp', description='Color Processor')
     parser.add_argument('-n'  , '--no-banner'   , action='store_true'       , help='don\'t show  banner on interactive mode')
+    parser.add_argument('-v'  , '--visualizer'  ,                             help='visualize current color processed')
+    # parser.add_argument('-s'  , '--simple-hex'  ,                             help='simple hex output')
+    # parser.add_argument('-d'  , '--debug'       ,                           , help='stop ')
     parser.add_argument('-l'  , '--load-script' , metavar='SCRIPT_FILE'     , help='load script from file or stdin')
     parser.add_argument('VAR' , nargs='*'       ,                             help='arbitrary python code execution')
 
@@ -28,7 +31,17 @@ if __name__ == '__main__':
         exec(c)
 
     is_tty = sys.stdin.isatty()
+
+    if args.visualizer:
+        import tkinter as tk 
+        root = tk.Tk()
+
+    def readfunc(prompt):
+        if is_tty and args.visualizer:
+            root.configure(background=get_last_processed())
+        return input('> ' if is_tty else '')
+
     code.interact(banner='' if args.no_banner or not is_tty else banner, \
             local=globals().update(locals()) or globals(), \
-            readfunc=lambda x:input('> ' if is_tty else ''), \
+            readfunc=readfunc, \
             exitmsg='')

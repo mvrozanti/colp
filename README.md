@@ -29,7 +29,7 @@ $ colp 'a=RGB(1,1,1)' # optionally load a color to memory
 │  │ ││  │─┘
 └─┘┘─┘┆─┘┆   the color processor
 
-> a = a.brighter()               # increment all channels
+> a = a + 1                      # increment all channels
 > a
 RGB(2, 2, 2)
 > a = a.redder()                 # increment single channel

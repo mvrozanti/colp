@@ -97,6 +97,30 @@ def test__er_suffix_and_brightness():
 def test_access_channel():
     assert RGB(25,0,0)[0] == 25
 
+def test_increase_brightness():
+    print('\n')
+    print('brightness')
+    darkest_red = RGB(1,0,0)
+    print(darkest_red.brighter(39))
+
+# def hook(hookfunc, oldfunc):
+#     def foo(*args, **kwargs):
+#         hookfunc(*args, **kwargs)
+#         return oldfunc(*args, **kwargs)
+#     return foo
+
+# def test_hook():
+#     print('\n')
+#     print('test_hook')
+#     def hookfunc(args):
+#         print('!')
+#     for clazz in [RGB,HSV,HEX]:
+#         for method_name in dir(clazz):
+#             if callable(getattr(clazz, method_name)):
+#                 setattr(clazz, method_name, hook(hookfunc, getattr(clazz, method_name)))
+#     RGB(0,0,0).to(HSV)
+
+
 # if __name__ == '__main__': # run tests
 #     for ptm in list(globals().keys()):
 #         if 'test' == ptm[:4]:

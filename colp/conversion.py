@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 from abc import ABC, abstractmethod
+import sys
 import copy
 import colorsys
 
@@ -21,22 +22,21 @@ class Color(ABC):
         else:
             raise('Invalid colorspace')
 
-    def is_gray(self):
+    def is_monochrome(self):
         return len(set(self.to(RGB).get_dimensions())) == 1
 
     def brightness(self, normalise=True):
         if normalise:
             return sum(self.get_dimensions(normalise=True)) / len(self.get_dimensions())
 
-    def darkness(self, normalise=True):
-        if normalise:
-            return 1 - self.brightness()
-
     def brighter(self, factor=1):
-        o = self.to(RGB)
-        for i in range(len(self.get_dimensions())):
-            o = o._inc_channel(i, factor=factor)
-        return o
+        return self.to(HSV).brighter(factor).to(self.__class__)
+
+    # def brighter(self, factor=1):
+    #     o = self.to(RGB)
+    #     for i in range(len(self.get_dimensions())):
+    #         o = o._inc_channel(i, factor=factor)
+    #     return o
 
     def darker(self):
         return self.brighter(factor=-1)
@@ -58,12 +58,12 @@ class Color(ABC):
         return self._inc_channel(2, factor=factor)
 
     def rotate(self, angle=1.):
-        o = self
-        original_class = o.__class__
-        if not isinstance(o, HSV):
-            o = self.to(HSV)
-        rotated_hsv = o.rotate(angle)
-        return rotated_hsv.to(original_class)
+        rotated_hsv = self.to(HSV).rotate(angle)
+        return rotated_hsv.to(self.__class__)
+
+    def saturate(self, factor=0.01, normalise=True):
+        rotated_hsv = self.to(HSV).saturate(factor=factor, normalise=normalise)
+        return rotated_hsv.to(self.__class__)
 
     def __radd__(self, o):
         return self.__add__(o);
@@ -148,19 +148,6 @@ class RGB(Color):
                 rgb[i] += o
             return RGB(*rgb)
         raise('Invalid addition')
-         
-    # def __sub__(self, o): 
-    #     if isinstance(o, Color):
-    #         o = copy.copy(o)
-    #         if isinstance(o, HSV):
-    #             o = o.to(RGB)
-    #         o.r = -o.r
-    #         o.g = -o.g
-    #         o.b = -o.b
-    #         o.a = -o.a
-    #         return self.__add__(o)
-    #     elif isinstance(o, (int,float)):
-    #         return self.__add__(-o)
 
 class HEX(RGB):
 
@@ -178,7 +165,11 @@ class HEX(RGB):
         return super().to(colorspace)
 
     def __repr__(self):
-        return "HEX('#%02x%02x%02x')" % tuple(self.get_dimensions(normalise=False))
+        simple_hex = '#%02x%02x%02x' % tuple(self.get_dimensions(normalise=False))
+        if sys.stdin.isatty():
+            return "HEX(%s)" % simple_hex
+        else:
+            return simple_hex
 
 class HSV(Color):
 
@@ -209,13 +200,25 @@ class HSV(Color):
 
     def rotate(self, angle=1., radians=False):
         h,s,v = self.get_dimensions(normalise=False)
-        return HSV(h+angle, s, v)
+        h += angle
+        h %= 360
+        return HSV(h, s, v, radians=radians)
+
+    def brighter(self, factor=0.01):
+        h,s,v = self.get_dimensions(normalise=True)
+        v += factor
+        return HSV(h, s, min(v, 1))
         
     def get_dimensions(self, normalise=False):
         if normalise:
             return [self.h,self.s,self.v]
         else:
             return [int(self.h*360), int(self.s*100), int(self.v*100)]
+
+    def saturate(self, factor=0.01, normalise=True):
+        h,s,v = self.get_dimensions(normalise=normalise)
+        s = factor
+        return HSV(h, min(s,1), v)
 
     def to(self, colorspace):
         if not colorspace or isinstance(self, colorspace): return self
@@ -399,6 +402,6 @@ def by_name(name=None):
             'darkslategray'                     : RGB(47 , 79 , 79 ),
             'black'                             : RGB(0  , 0  , 0  ),
             }
-    le_dict = dict(x11_spec, **html_spec)
-    if name: return le_dict[name.lower()]
-    else: return le_dict
+    all_constants = dict(x11_spec, **html_spec)
+    if name: return all_constants[name.lower()]
+    else: return all_constants
