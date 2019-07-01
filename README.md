@@ -29,20 +29,20 @@ $ colp 'a=RGB(1,1,1)' # optionally load a color to memory
 │  │ ││  │─┘
 └─┘┘─┘┆─┘┆   the color processor
 
-> a = a.brighter() # increment all channels
+> a = a.brighter()               # increment all channels
 > a
 RGB(2, 2, 2)
-> a = a.redder() # single-channel increment
+> a = a.redder()                 # increment single channel
 > a
 RGB(3, 2, 2)
-> a = a.rotate(3.) # rotate in HSV space
+> a = a.rotate(3.)               # rotate in HSV space
 > a
 RGB(2, 1, 1)
-> by_name('red') == a # compare
+> by_name('red') == a            # compare
 False
 > by_name('red') == RGB(255,0,0)
 True
-> -a # invert color
+> -a                             # invert 
 RGB(252, 253, 253)
 >
 ```
@@ -50,7 +50,7 @@ RGB(252, 253, 253)
 #### Or pipe commands in
 
 ```
-$ echo "HEX('#ff0000').rotate(15.).to(RGB)" | colp -n
+$ echo "HEX('#ff0000').rotate(15.).to(RGB)" | colp
 
 RGB(255, 63, 0)
 
@@ -73,26 +73,18 @@ HEX('#010203')
 ### Formal Parameters
 
 ```
-usage: colp [-h] [-I] [-i] [-c command] [-n] [-f INPUT_FILE] [-l SCRIPT_FILE]
-            [VAR [VAR ...]]
+usage: colp [-h] [-n] [-l SCRIPT_FILE] [VAR [VAR ...]]
 
 Color Processor
 
 positional arguments:
-  VAR                   variable
+  VAR                   arbitrary python code execution
 
 optional arguments:
   -h, --help            show this help message and exit
-  -I, --inplace         load script with transform
-  -i, --interactive     interactive mode
-  -c command, --command command
-                        run command
   -n, --no-banner       don't show banner on interactive mode
-  -f INPUT_FILE, --input-file INPUT_FILE
-                        load variables from file or stdin (-)
   -l SCRIPT_FILE, --load-script SCRIPT_FILE
-                        load script with transform function from file or
-                        stdin(-)
+                        load script from file or stdin
 ```
 
 ### Basic Color Operators
@@ -141,4 +133,3 @@ optional arguments:
 |      |<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/YIQ_IQ_plane.svg/1024px-YIQ_IQ_plane.svg.png" alt="drawing" width="300"/>|
 |[ ]   | YUV|
 |      |<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/YUV_UV_plane.svg/1024px-YUV_UV_plane.svg.png" alt="drawing" width="300"/>|
-

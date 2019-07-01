@@ -1,7 +1,9 @@
 #!/usr/bin/env python
 from colp import Color,HSV,HEX,RGB,by_name,detect_normalised
-import code
 import argparse
+import code
+import os.path as op
+import readline
 import sys
 banner = """
 \033[95m┌─┐┌─┐┬  ┬─┐
@@ -10,34 +12,23 @@ banner = """
 """
 if __name__ == '__main__': 
     parser = argparse.ArgumentParser(prog='colp', description='Color Processor')
-    parser.add_argument('-I'  , '--inplace'     , action='store_true'   , help='load script with transform')
-    parser.add_argument('-i'  , '--interactive' , action='store_true'   , default=True                                                      , help='interactive mode')
-    parser.add_argument('-c'  , '--command'     , metavar='command'     , default=True                                                      , help='run command')
-    parser.add_argument('-n'  , '--no-banner'   , action='store_true'   , default=False                                                     , help='don\'t show  banner on interactive mode')
-    parser.add_argument('-f'  , '--input-file'  , metavar='INPUT_FILE'  , help='load variables from file or stdin (-)')
-    parser.add_argument('-l'  , '--load-script' , metavar='SCRIPT_FILE' , help='load script with transform function from file or stdin(-)')
-    parser.add_argument('VAR' , nargs='*'       , help='variable')
+    parser.add_argument('-n'  , '--no-banner'   , action='store_true'       , help='don\'t show  banner on interactive mode')
+    parser.add_argument('-l'  , '--load-script' , metavar='SCRIPT_FILE'     , help='load script from file or stdin')
+    parser.add_argument('VAR' , nargs='*'       ,                             help='arbitrary python code execution')
 
     args = parser.parse_args()
 
-    readlines = lambda filename: (sys.stdin if filename == '-' else open(filename, 'rb')).\
+    readlines = lambda filename: (sys.stdin if filename == '-' else open(filename, 'r')).\
             readlines()
     
-    if args.input_file:
-        input_file_contents = readlines(args.input_file)
-    
     if args.load_script:
-        loaded_script = readlines(args.load_script)
+        exec(''.join(readlines(args.load_script)))
 
     for c in args.VAR:
         exec(c)
 
     is_tty = sys.stdin.isatty()
-
-    if args.interactive:
-        if is_tty:
-            import readline
-        code.interact(banner='' if args.no_banner else banner, \
-                local=globals().update(locals()) or globals(), \
-                readfunc=lambda x:input('> ' if is_tty else ''), \
-                exitmsg='')
+    code.interact(banner='' if args.no_banner or not is_tty else banner, \
+            local=globals().update(locals()) or globals(), \
+            readfunc=lambda x:input('> ' if is_tty else ''), \
+            exitmsg='')
