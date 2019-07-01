@@ -11,13 +11,14 @@ banner = """
 \033[93m└─┘┘─┘┆─┘┆   \x1b[6;30;42mthe color processor\x1b[0m
 """
 if __name__ == '__main__': 
-    parser = argparse.ArgumentParser(prog='colp', description='Color Processor')
-    parser.add_argument('-n'  , '--no-banner'   , action='store_true'       , help='don\'t show  banner on interactive mode')
-    parser.add_argument('-v'  , '--visualizer'  ,                             help='visualize current color processed')
-    # parser.add_argument('-s'  , '--simple-hex'  ,                             help='simple hex output')
-    # parser.add_argument('-d'  , '--debug'       ,                           , help='stop ')
-    parser.add_argument('-l'  , '--load-script' , metavar='SCRIPT_FILE'     , help='load script from file or stdin')
-    parser.add_argument('VAR' , nargs='*'       ,                             help='arbitrary python code execution')
+    parser = argparse.ArgumentParser(prog='colp' , description='Color Processor')
+    parser.add_argument('-n'                     , '--no-banner'                  , action='store_true'                       , help='don\'t show  banner on interactive mode')
+    parser.add_argument('-v'                     , '--visualizer'                 , help='visualize current color processed')
+    parser.add_argument('-s'                     , '--simple-mode'                , action='store_true'                       , help='css-compliant output')
+    parser.add_argument('-S'                     , '--scripting-mode'             , action='store_true'                       , default=True                                    , help='colp script output')
+    # parser.add_argument('-d'                   , '--debug'                      ,                                           , help='stop ')
+    parser.add_argument('-l'                     , '--load-script'                , metavar='SCRIPT_FILE'                     , help='load script from file or stdin')
+    parser.add_argument('VAR'                    , nargs='*'                      , help='arbitrary python code execution')
 
     args = parser.parse_args()
 
@@ -29,6 +30,8 @@ if __name__ == '__main__':
 
     for c in args.VAR:
         exec(c)
+
+   Color.MODE = 'simple' if args.simple_hex else 'script'
 
     is_tty = sys.stdin.isatty()
 

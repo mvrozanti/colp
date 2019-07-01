@@ -9,6 +9,10 @@ def detect_normalised(may_be_normalised):
 
 class Color(ABC):
 
+    MODES = ['script', 'simple']
+    # MODE = 'simple'
+    MODE = 'script'
+
     @abstractmethod
     def get_dimensions(self, normalise=False):
         pass
@@ -166,10 +170,10 @@ class HEX(RGB):
 
     def __repr__(self):
         simple_hex = '#%02x%02x%02x' % tuple(self.get_dimensions(normalise=False))
-        if sys.stdin.isatty():
-            return "HEX(%s)" % simple_hex
-        else:
+        if Color.MODE == 'simple':
             return simple_hex
+        elif Color.MODE == 'script':
+            return "HEX(%s)" % simple_hex
 
 class HSV(Color):
 
