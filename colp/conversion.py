@@ -74,8 +74,7 @@ class Color(ABC):
     def __sub__(self, o):
         new_dims = o.to(self.__class__).get_dimensions(normalise=True)
         for i in range(len(new_dims)):
-            new_dims[i] -= self.get_dimensions(normalise=True)[i]
-            new_dims[i] = abs(new_dims[i])
+            new_dims[i] = abs(new_dims[i] - self.get_dimensions(normalise=True)[i])
         return self.__class__(*new_dims)
 
     def __getitem__(self, i):
