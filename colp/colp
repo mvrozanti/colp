@@ -31,7 +31,7 @@ if __name__ == '__main__':
     for c in args.VAR:
         exec(c)
 
-   Color.MODE = 'simple' if args.simple_hex else 'script'
+    Color.MODE = 'simple' if args.simple_hex else 'script'
 
     is_tty = sys.stdin.isatty()
 
