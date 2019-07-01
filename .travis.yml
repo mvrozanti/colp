@@ -14,4 +14,4 @@ script:
   - pytest test/test.py
   - sudo chmod +x ./test/test.sh && ./$_
   - pip install colp
-  - colp 'a=RGB(1,2,3)'
+  - echo 'a=RGB(1,2,3)' | colp 
