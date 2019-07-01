@@ -12,5 +12,6 @@ matrix:
 script:
   - pip install -r requirements.txt
   - pytest test/test.py
-  - colp 'a=RGB(1,2,3)'
   - sudo chmod +x ./test/test.sh && ./$_
+  - pip install colp
+  - colp 'a=RGB(1,2,3)'
