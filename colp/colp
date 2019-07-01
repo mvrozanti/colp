@@ -32,7 +32,7 @@ if __name__ == '__main__':
     for c in args.VAR:
         exec(c)
 
-    Color.MODE = 'simple' if args.simple_hex else 'script'
+    Color.MODE = 'simple' if args.simple_mode else 'script'
 
     is_tty = sys.stdin.isatty()
 
@@ -45,7 +45,12 @@ if __name__ == '__main__':
             root.configure(background=get_last_processed())
         return input('> ' if is_tty else '')
 
-    code.interact(banner='' if args.no_banner or not is_tty else banner, \
-            local=globals().update(locals()) or globals(), \
-            readfunc=readfunc, \
-            exitmsg='')
+    if float(sys.version[:3]) >= 3.6 and not 'dev' in sys.version:
+        code.interact(banner='' if args.no_banner or not is_tty else banner, \
+                local=globals().update(locals()) or globals(), \
+                readfunc=readfunc, \
+                exitmsg='')
+    else:
+        code.interact(banner='' if args.no_banner or not is_tty else banner, \
+                local=globals().update(locals()) or globals(), \
+                readfunc=readfunc)
