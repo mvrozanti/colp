@@ -3,7 +3,7 @@ import sys
 if sys.version[0] == '3':
     from abc import ABC, abstractmethod
 else:
-    from abc import ABCMeta, abstractmethod
+    from abc import ABCMeta as ABC, abstractmethod
 import copy
 import colorsys
 
