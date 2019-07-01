@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+# -*- coding: utf-8 -*-
 from colp import Color,HSV,HEX,RGB,by_name,detect_normalised #,get_last_processed
 import argparse
 import code
@@ -31,7 +32,7 @@ if __name__ == '__main__':
     for c in args.VAR:
         exec(c)
 
-   Color.MODE = 'simple' if args.simple_hex else 'script'
+    Color.MODE = 'simple' if args.simple_hex else 'script'
 
     is_tty = sys.stdin.isatty()
 

@@ -6,9 +6,6 @@ python:
 - 3.5-dev
 - '3.6'
 - 3.6-dev
-matrix:
-  allow_failures:
-    - python: '2.7'
 script:
   - pip install -r requirements.txt
   - pytest test/test.py

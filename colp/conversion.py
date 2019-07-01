@@ -1,9 +1,10 @@
 #!/usr/bin/env python
 import sys
 if sys.version[0] == '3':
-    from abc import ABC, abstractmethod
+    from abc import ABC
 else:
-    from abc import ABCMeta as ABC, abstractmethod
+    from abc import ABCMeta as ABC
+from abc import abstractmethod
 import copy
 import colorsys
 
