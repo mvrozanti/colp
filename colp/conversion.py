@@ -71,12 +71,18 @@ class Color(ABC):
     def __rsub__(self, o):
         return self.__sub__(o);
 
+    def __sub__(self, o):
+        new_dims = o.to(self.__class__).get_dimensions(normalise=True)
+        for i in range(len(new_dims)):
+            new_dims[i] -= self.get_dimensions(normalise=True)[i]
+            new_dims[i] = abs(new_dims[i])
+        return self.__class__(*new_dims)
+
+    def __getitem__(self, i):
+        return self.get_dimensions()[i]
+
     def __neg__(self):
-        o = copy.copy(self).to(RGB)
-        channels = o.get_dimensions()
-        for i in len(channels):
-            channels[i] = 255 - channels[i]
-        return RGB(*channels).to(self.__class__)
+        return RGB(255,255,255) - self
 
     def __eq__(self, other):
         if other is None: return False
@@ -125,44 +131,37 @@ class RGB(Color):
         rgb = (rgb << 8) + b
         return rgb
 
-    def __neg__(self):
-        o = copy.copy(self)
-        o.r = 1.0 - o.r
-        o.g = 1.0 - o.g
-        o.b = 1.0 - o.b
-        return o
-
-    def __add__(self, o, normalise=False): 
+    def __add__(self, o): 
         if isinstance(o, Color):
             o = o.to(RGB)
             rr = o.r + self.r
             rg = o.g + self.g
             rb = o.b + self.b
             return RGB(rr,rg,rb) 
-        if isinstance(o, float) and normalise:
+        if isinstance(o, float):
             if 0 <= o <= 1:
                 return RGB(max(self.r + o, 0), \
                         max(self.g + o, 0), \
                         max(self.b + o, 0))
-        elif isinstance(o, int) and not normalise:
+        elif isinstance(o, int):
             rgb = self.get_dimensions(normalise=False)
             for i in range(len(rgb)):
                 rgb[i] += o
             return RGB(*rgb)
         raise('Invalid addition')
          
-    def __sub__(self, o): 
-        if isinstance(o, Color):
-            o = copy.copy(o)
-            if isinstance(o, HSV):
-                o = o.to(RGB)
-            o.r = -o.r
-            o.g = -o.g
-            o.b = -o.b
-            o.a = -o.a
-            return self.__add__(o)
-        elif isinstance(o, (int,float)):
-            return self.__add__(-o)
+    # def __sub__(self, o): 
+    #     if isinstance(o, Color):
+    #         o = copy.copy(o)
+    #         if isinstance(o, HSV):
+    #             o = o.to(RGB)
+    #         o.r = -o.r
+    #         o.g = -o.g
+    #         o.b = -o.b
+    #         o.a = -o.a
+    #         return self.__add__(o)
+    #     elif isinstance(o, (int,float)):
+    #         return self.__add__(-o)
 
 class HEX(RGB):
 
@@ -226,26 +225,6 @@ class HSV(Color):
             rgb = RGB(*colorsys.hsv_to_rgb(h,s,v*255))
             if colorspace == HEX: return rgb.to(HEX)
             else: return rgb
-            # import code
-            # code.interact(local=globals().update(locals()) or globals())
-            # h *= 360
-            # C = v * s
-            # X = C * (1 - abs((h/60) % 2 - 1))
-            # m = v - C
-            # if     0 <= h <  60:
-            #     _RGB = (C,X,0)
-            # elif  60 <= h < 120:
-            #     _RGB = (X,C,0)
-            # elif 120 <= h < 180:
-            #     _RGB = (0,C,X)
-            # elif 180 <= h < 240:
-            #     _RGB = (0,X,C)
-            # elif 240 <= h < 300:
-            #     _RGB = (X,0,C)
-            # elif 300 <= h < 360:
-            #     _RGB = (C,0,X)
-            # rgb = RGB((_RGB[0]+m), (_RGB[1]+m)*255, (_RGB[2]+m)*255)
-            # return rgb.to(HEX) if colorspace == HEX else rgb
         super().to(colorspace)
 
 def by_name(name=None):

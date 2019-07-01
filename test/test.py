@@ -94,6 +94,9 @@ def test__er_suffix_and_brightness():
     assert -darkest_red == lightest_blue
     assert darkest_red.brightness() == darkest_green.brightness() == darkest_blue.brightness() == 1/(255*3)
 
+def test_access_channel():
+    assert RGB(25,0,0)[0] == 25
+
 # if __name__ == '__main__': # run tests
 #     for ptm in list(globals().keys()):
 #         if 'test' == ptm[:4]:
