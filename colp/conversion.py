@@ -1,6 +1,9 @@
 #!/usr/bin/env python
-from abc import ABC, abstractmethod
 import sys
+if sys.version[0] == '3':
+    from abc import ABC, abstractmethod
+else:
+    from abc import ABCMeta, abstractmethod
 import copy
 import colorsys
 
