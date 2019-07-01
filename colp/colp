@@ -44,7 +44,12 @@ if __name__ == '__main__':
             root.configure(background=get_last_processed())
         return input('> ' if is_tty else '')
 
-    code.interact(banner='' if args.no_banner or not is_tty else banner, \
-            local=globals().update(locals()) or globals(), \
-            readfunc=readfunc, \
-            exitmsg='')
+    if float(sys.version[:3]) >= 3.6:
+        code.interact(banner='' if args.no_banner or not is_tty else banner, \
+                local=globals().update(locals()) or globals(), \
+                readfunc=readfunc, \
+                exitmsg='')
+    else:
+        code.interact(banner='' if args.no_banner or not is_tty else banner, \
+                local=globals().update(locals()) or globals(), \
+                readfunc=readfunc)
