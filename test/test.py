@@ -4,6 +4,29 @@ import sys
 sys.path.append('..')
 from colp import Color,RGB,HSV,HEX,by_name
 
+# def hook(hookfunc, oldfunc):
+#     def foo(*args, **kwargs):
+#         hookfunc(*args, **kwargs)
+#         return oldfunc(*args, **kwargs)
+#     return foo
+
+# def test_hook():
+#     print('\n')
+#     print('test_hook')
+#     def hookfunc(args):
+#         print('!')
+#     for clazz in [RGB,HSV,HEX]:
+#         for method_name in dir(clazz):
+#             if callable(getattr(clazz, method_name)):
+#                 setattr(clazz, method_name, hook(hookfunc, getattr(clazz, method_name)))
+#     RGB(0,0,0).to(HSV)
+
+
+# if __name__ == '__main__': # run tests
+#     for ptm in list(globals().keys()):
+#         if 'test' == ptm[:4]:
+#             eval(ptm + '()')
+
 def test_inter_color_sum():
     print('\n')
     rgb_blue = RGB(0,  0,255)
@@ -78,7 +101,7 @@ def test_rotate():
 
 def test_web_safe():
     ws_hex_red = HEX('#f00')
-    assert ws_hex_red == HEX('#ff0000')
+    assert ws_hex_red == by_name('red')
 
 def test__er_suffix_and_brightness():
     print('\n')
@@ -103,25 +126,13 @@ def test_increase_brightness():
     darkest_red = RGB(1,0,0)
     print(darkest_red.brighter(39))
 
-# def hook(hookfunc, oldfunc):
-#     def foo(*args, **kwargs):
-#         hookfunc(*args, **kwargs)
-#         return oldfunc(*args, **kwargs)
-#     return foo
+def test_truediv_and_mul():
+    print('\n')
+    print('truediv and mul')
+    red = RGB(255,0,0)
+    faded_red = red / 3
+    assert faded_red == RGB(85,0,0)
+    assert faded_red * 3 == red
+    hsv_red = red.to(HSV)
+    assert hsv_red / 3 == faded_red
 
-# def test_hook():
-#     print('\n')
-#     print('test_hook')
-#     def hookfunc(args):
-#         print('!')
-#     for clazz in [RGB,HSV,HEX]:
-#         for method_name in dir(clazz):
-#             if callable(getattr(clazz, method_name)):
-#                 setattr(clazz, method_name, hook(hookfunc, getattr(clazz, method_name)))
-#     RGB(0,0,0).to(HSV)
-
-
-# if __name__ == '__main__': # run tests
-#     for ptm in list(globals().keys()):
-#         if 'test' == ptm[:4]:
-#             eval(ptm + '()')

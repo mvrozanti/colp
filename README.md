@@ -73,7 +73,8 @@ HEX('#010203')
 ### Formal Parameters
 
 ```
-usage: colp [-h] [-n] [-l SCRIPT_FILE] [VAR [VAR ...]]
+usage: colp [-h] [-n] [-v VISUALIZER] [-s] [-S] [-l SCRIPT_FILE]
+            [VAR [VAR ...]]
 
 Color Processor
 
@@ -83,6 +84,10 @@ positional arguments:
 optional arguments:
   -h, --help            show this help message and exit
   -n, --no-banner       don't show banner on interactive mode
+  -v VISUALIZER, --visualizer VISUALIZER
+                        visualize current color processed
+  -s, --simple-mode     css-compliant output
+  -S, --scripting-mode  colp script output
   -l SCRIPT_FILE, --load-script SCRIPT_FILE
                         load script from file or stdin
 ```
@@ -92,8 +97,8 @@ optional arguments:
 |------|--------|
 |  ✓   |  `-`   |
 |  ✓   |  `+`   |
-|      |  `*`   |
-|      |  `/`   |
+|  ✓   |  `*`   |
+|  ✓   |  `/`   |
 |      |  `//`  |
 |      |  `!`   |
 |      |  `~`   |
@@ -102,7 +107,6 @@ optional arguments:
 |      |  `&`   |
 |      |  `**`  |
 |      |  `%`   |
-
 
 ### Named Constants
 - [HTML 4.01 specification](https://en.wikipedia.org/wiki/Web_colors#HTML_color_names)
@@ -115,21 +119,19 @@ optional arguments:
 - [colormath-basics](http://www.laurenscorijn.com/articles/colormath-basics)
 
 
-|Status|Supported Color Models|
-|------|---------------|
-|✓     |      RGB/RGBA/HEX:    |
-|      |<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/RGB_Cube_Show_lowgamma_cutout_a.png/1280px-RGB_Cube_Show_lowgamma_cutout_a.png" alt="drawing" width="300"/>|
-|✓     |      HSV=HSB=HSI=HSD: |
-|      |<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/HSV_color_solid_cylinder_saturation_gray.png/1280px-HSV_color_solid_cylinder_saturation_gray.png" alt="drawing" width="300"/>|
-|[ ]   | HSL:|
-|      |<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/HSL_color_solid_cylinder_saturation_gray.png/1280px-HSL_color_solid_cylinder_saturation_gray.png" alt="drawing" width="300"/>|
-|[ ]   |  CMY[K]|
-|      | <img src="https://i.imgur.com//Bwi2zUi.png" alt="drawing" width="300"/>|
-|[ ]   | [CIE]LAB|
-|      | <img src="https://upload.wikimedia.org/wikipedia/commons/0/06/CIELAB_color_space_top_view.png" alt="drawing" width="300"/>|
-|[ ]   |  YCbCr |
-|      | <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/YCbCr-CbCr_Scaled_Y50.png/1024px-YCbCr-CbCr_Scaled_Y50.png" alt="drawing" width="300"/>|
-|[ ]   | YIQ|
-|      |<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/YIQ_IQ_plane.svg/1024px-YIQ_IQ_plane.svg.png" alt="drawing" width="300"/>|
-|[ ]   | YUV|
-|      |<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/YUV_UV_plane.svg/1024px-YUV_UV_plane.svg.png" alt="drawing" width="300"/>|
+### Supported Color Models
+
+|                      |                      |
+|----------------------|----------------------|
+|  ✓  RGB/RGBA/HEX:    | ✓ HSV=HSB=HSI=HSD:   |
+|<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/RGB_Cube_Show_lowgamma_cutout_a.png/1280px-RGB_Cube_Show_lowgamma_cutout_a.png" alt="drawing" width="300"/>|<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/HSV_color_solid_cylinder_saturation_gray.png/1280px-HSV_color_solid_cylinder_saturation_gray.png" alt="drawing" width="300"/>|
+| HSL:                 | CMY[K]               |
+|<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/HSL_color_solid_cylinder_saturation_gray.png/1280px-HSL_color_solid_cylinder_saturation_gray.png" alt="drawing" width="300"/>|<img src="https://i.imgur.com//Bwi2zUi.png" alt="drawing" width="300"/>|
+| [CIE]LAB             | YCbCr                |
+| <img src="https://upload.wikimedia.org/wikipedia/commons/0/06/CIELAB_color_space_top_view.png" alt="drawing" width="300"/>|<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/YCbCr-CbCr_Scaled_Y50.png/1024px-YCbCr-CbCr_Scaled_Y50.png" alt="drawing" width="300"/>|
+| YIQ                  | YUV                  |
+|<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/YIQ_IQ_plane.svg/1024px-YIQ_IQ_plane.svg.png" alt="drawing" width="300"/>|<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/YUV_UV_plane.svg/1024px-YUV_UV_plane.svg.png" alt="drawing" width="300"/>|
+
+### Contributing
+
+- There's definitely some room for automating CSS-file editing.

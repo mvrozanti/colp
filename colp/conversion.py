@@ -75,6 +75,12 @@ class Color(ABC):
     def __rsub__(self, o):
         return self.__sub__(o);
 
+    def __truediv__(self, o):
+        return self.__mul__(1/o)
+
+    def __mul__(self, o):
+        return self.to(RGB) * o
+
     def __sub__(self, o):
         new_dims = o.to(self.__class__).get_dimensions(normalise=True)
         for i in range(len(new_dims)):
@@ -126,6 +132,15 @@ class RGB(Color):
             return HSV(*hsv_dimensions)
         if colorspace is HEX:
             return HEX('#%02x%02x%02x' % tuple(self.get_dimensions()))
+
+    def __truediv__(self, o):
+        return self.__mul__(1/o)
+
+    def __mul__(self, o):
+        if isinstance(o, Color):
+            pass
+        if isinstance(o, (int,float)):
+            return RGB(*[s_i * o for s_i in self.get_dimensions(normalise=True)])
 
     def __hash__(self):
         r,g,b = self.get_dimensions()
