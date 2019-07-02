@@ -227,7 +227,8 @@ class HEX(RGB):
             return RGB(*self.get_dimensions(normalise=True))
         return super().to(colorspace)
 
-    def __repr__(self, mode=Color.MODE):
+    def __repr__(self, mode=None):
+        if not mode: mode = Color.MODE
         simple_hex = '#%02x%02x%02x' % tuple(self.get_dimensions(normalise=False))
         if   mode == 'simple':
             return simple_hex

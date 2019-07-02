@@ -24,18 +24,18 @@ if __name__ == '__main__':
 
     readlines = lambda filename: (sys.stdin if filename == '-' else open(filename, 'r')).\
             readlines()
-    
-    if args.load_script:
-        exec(''.join(readlines(args.load_script)))
-
-    for c in args.VAR:
-        exec(c)
 
     all_colors = by_name() # make sure to load before settting Color.MODE below
     for c_name,c_var in all_colors.items():
         locals()[c_name] = c_var
 
     Color.MODE = 'simple' if args.simple_mode else 'script'
+
+    for c in args.VAR:
+        exec(c)
+    
+    if args.load_script:
+        exec(''.join(readlines(args.load_script)))
 
     is_tty = sys.stdin.isatty()
 
@@ -46,12 +46,13 @@ if __name__ == '__main__':
     def readfunc(prompt):
         return input('> ' if is_tty else '')
 
-    if float(sys.version[:3]) >= 3.6 and not 'dev' in sys.version:
-        code.interact(banner='' if args.no_banner or not is_tty else banner, \
-                local=globals().update(locals()) or globals(), \
-                readfunc=readfunc, \
-                exitmsg='')
-    else:
-        code.interact(banner='' if args.no_banner or not is_tty else banner, \
-                local=globals().update(locals()) or globals(), \
-                readfunc=readfunc)
+    if not args.load_script:
+        if float(sys.version[:3]) >= 3.6 and not 'dev' in sys.version:
+            code.interact(banner='' if args.no_banner or not is_tty else banner, \
+                    local=globals().update(locals()) or globals(), \
+                    readfunc=readfunc, \
+                    exitmsg='')
+        else:
+            code.interact(banner='' if args.no_banner or not is_tty else banner, \
+                    local=globals().update(locals()) or globals(), \
+                    readfunc=readfunc)
