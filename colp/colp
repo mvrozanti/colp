@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-from colp import Color,HSV,HEX,RGB,by_name,detect_normalised #,get_last_processed
+from colp import Color,HSV,HEX,RGB,by_name,detect_normalised
 import argparse
 import code
 import os.path as op
@@ -13,7 +13,7 @@ banner = """
 if __name__ == '__main__': 
     parser = argparse.ArgumentParser(prog='colp' , description='Color Processor')
     parser.add_argument('-n'                     , '--no-banner'                  , action='store_true'                       , help='don\'t show  banner on interactive mode')
-    parser.add_argument('-v'                     , '--visualizer'                 , help='visualize current color processed')
+    parser.add_argument('-v'                     , '--visualizer'                 , action='store_true'                       , help='visualize current color processed')
     parser.add_argument('-s'                     , '--simple-mode'                , action='store_true'                       , help='css-compliant output')
     parser.add_argument('-S'                     , '--scripting-mode'             , action='store_true'                       , default=True                                    , help='colp script output')
     # parser.add_argument('-d'                   , '--debug'                      ,                                           , help='stop ')
@@ -41,11 +41,9 @@ if __name__ == '__main__':
 
     if args.visualizer:
         import tkinter as tk 
-        root = tk.Tk()
+        Color.visualizer = tk.Tk() 
 
     def readfunc(prompt):
-        if is_tty and args.visualizer:
-            root.configure(background=get_last_processed())
         return input('> ' if is_tty else '')
 
     if float(sys.version[:3]) >= 3.6 and not 'dev' in sys.version:

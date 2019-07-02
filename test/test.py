@@ -22,11 +22,6 @@ from colp import Color,RGB,HSV,HEX,by_name
 #     RGB(0,0,0).to(HSV)
 
 
-# if __name__ == '__main__': # run tests
-#     for ptm in list(globals().keys()):
-#         if 'test' == ptm[:4]:
-#             eval(ptm + '()')
-
 def test_inter_color_sum():
     print('\n')
     rgb_blue = RGB(0,  0,255)
@@ -142,3 +137,14 @@ def test_and_or():
     red = RGB(255,0,0)
     some_red = red & 3
 
+def test_monochrome_check():
+    darkest_gray = RGB(1,1,1)
+    darkest_gray.is_monochrome()
+
+if __name__ == '__main__': # run tests with visualizer on
+    import tkinter as tk 
+    Color.visualizer = tk.Tk()
+
+    for ptm in list(globals().keys()):
+        if 'test' == ptm[:4]:
+            eval(ptm + '()')

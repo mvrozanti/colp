@@ -1,13 +1,26 @@
 #!/usr/bin/env python
 from abc import ABC, abstractmethod
-import sys
-import copy
+from functools import wraps
 import colorsys
+import copy
+import sys
 
 def detect_normalised(may_be_normalised):
     return all([type(n) == float and 0 <= n <= 1 for n in may_be_normalised])
 
+def visualizable(func):
+    @wraps(func)
+    def wrapper(self, *args, **kwargs):
+        try:
+            if Color.visualizer:
+                Color.visualizer.configure(background=self.to(HEX).__repr__('simple'))
+        except Exception as e: print(e)
+        return func(self, *args, **kwargs)
+    return wrapper
+
 class Color(ABC):
+
+    visualizer = None
 
     MODES = ['script', 'simple']
     # MODE = 'simple'
@@ -26,25 +39,24 @@ class Color(ABC):
         else:
             raise('Invalid colorspace')
 
+    @visualizable
     def is_monochrome(self):
         return len(set(self.to(RGB).get_dimensions())) == 1
 
+    @visualizable
     def brightness(self, normalise=True):
         if normalise:
             return sum(self.get_dimensions(normalise=True)) / len(self.get_dimensions())
 
+    @visualizable
     def brighter(self, factor=0.01):
         return self.to(HSV).brighter(factor=factor).to(self.__class__)
 
-    # def brighter(self, factor=1):
-    #     o = self.to(RGB)
-    #     for i in range(len(self.get_dimensions())):
-    #         o = o._inc_channel(i, factor=factor)
-    #     return o
-
+    @visualizable
     def darker(self):
         return self.brighter(factor=-1)
 
+    @visualizable
     def _inc_channel(self, chan_ix, factor=1):
         o = self.to(RGB)
         channels = o.get_dimensions()
@@ -52,41 +64,53 @@ class Color(ABC):
         channels[chan_ix] %= 256
         return RGB(*channels).to(self.__class__) 
 
+    @visualizable
     def redder(self, factor=1):
         return self._inc_channel(0, factor=factor)
 
+    @visualizable
     def greener(self, factor=1):
         return self._inc_channel(1, factor=factor)
 
+    @visualizable
     def bluer(self, factor=1):
         return self._inc_channel(2, factor=factor)
 
+    @visualizable
     def rotate(self, angle=1.):
         rotated_hsv = self.to(HSV).rotate(angle)
         return rotated_hsv.to(self.__class__)
 
+    @visualizable
     def saturate(self, factor=0.01, normalise=True):
         rotated_hsv = self.to(HSV).saturate(factor=factor, normalise=normalise)
         return rotated_hsv.to(self.__class__)
 
+    @visualizable
     def __radd__(self, o):
         return self.__add__(o);
 
+    @visualizable
     def __rsub__(self, o):
         return self.__sub__(o);
 
+    @visualizable
     def __truediv__(self, o):
         return self.__mul__(1/o)
 
+    @visualizable
     def __and__(self, o):
         return self.to(RGB) & o
 
+    @visualizable
     def __or__(self, o):
         return self.to(RGB) | o
 
+    @visualizable
     def __mul__(self, o):
         return self.to(RGB) * o
 
+    @visualizable
     def __sub__(self, o):
         new_dims = o.to(self.__class__).get_dimensions(normalise=True)
         for i in range(len(new_dims)):
@@ -139,23 +163,28 @@ class RGB(Color):
         if colorspace is HEX:
             return HEX('#%02x%02x%02x' % tuple(self.get_dimensions()))
 
+    @visualizable
     def __truediv__(self, o):
         return self.__mul__(1/o)
 
+    @visualizable
     def __and__(self, o):
         if isinstance(o, (int,float)):
             return RGB(*[s_i & o for s_i in self.get_dimensions(normalise=False)])
 
+    @visualizable
     def __or__(self, o):
         if isinstance(o, (int,float)):
             return RGB(*[s_i | o for s_i in self.get_dimensions(normalise=False)])
 
+    @visualizable
     def __mul__(self, o):
         if isinstance(o, Color):
             pass
         if isinstance(o, (int,float)):
             return RGB(*[s_i * o for s_i in self.get_dimensions(normalise=True)])
 
+    @visualizable
     def __hash__(self):
         r,g,b = self.get_dimensions()
         rgb = r
@@ -163,6 +192,7 @@ class RGB(Color):
         rgb = (rgb << 8) + b
         return rgb
 
+    @visualizable
     def __add__(self, o): 
         if isinstance(o, Color):
             o = o.to(RGB)
@@ -197,12 +227,12 @@ class HEX(RGB):
             return RGB(*self.get_dimensions(normalise=True))
         return super().to(colorspace)
 
-    def __repr__(self):
+    def __repr__(self, mode=Color.MODE):
         simple_hex = '#%02x%02x%02x' % tuple(self.get_dimensions(normalise=False))
-        if Color.MODE == 'simple':
+        if   mode == 'simple':
             return simple_hex
-        elif Color.MODE == 'script':
-            return "HEX(%s)" % simple_hex
+        elif mode == 'script':
+            return "HEX('%s')" % simple_hex
 
 class HSV(Color):
 
@@ -220,23 +250,28 @@ class HSV(Color):
     def __radd__(self, o):
         return self.__add__(o)
 
+    @visualizable
     def __add__(self, o):
         if isinstance(o, RGB):
             return o + self 
 
+    @visualizable
     def __hash__(self):
         return self.to(RGB).__hash__()
 
+    @visualizable
     def __eq__(self, o):
         if isinstance(o, RGB):
             return self.to(RGB) == o
 
+    @visualizable
     def rotate(self, angle=1., radians=False):
         h,s,v = self.get_dimensions(normalise=False)
         h += angle
         h %= 360
         return HSV(h, s, v, radians=radians)
 
+    @visualizable
     def brighter(self, factor=0.01):
         h,s,v = self.get_dimensions(normalise=True)
         v += factor
@@ -248,6 +283,7 @@ class HSV(Color):
         else:
             return [int(self.h*360), int(self.s*100), int(self.v*100)]
 
+    @visualizable
     def saturate(self, factor=0.01, normalise=True):
         h,s,v = self.get_dimensions(normalise=normalise)
         s = factor
