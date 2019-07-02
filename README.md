@@ -29,22 +29,21 @@ $ colp 'a=RGB(1,1,1)' # optionally load a color to memory
 │  │ ││  │─┘
 └─┘┘─┘┆─┘┆   the color processor
 
-> a = a + 1                      # increment all channels
-> a
-RGB(2, 2, 2)
-> a = a.redder()                 # increment single channel
-> a
-RGB(3, 2, 2)
-> a = a.rotate(3.)               # rotate in HSV space
+> a = a.redder()                  # single channel increment
 > a
 RGB(2, 1, 1)
-> by_name('red') == a            # compare
-False
-> by_name('red') == RGB(255,0,0)
-True
-> -a                             # invert 
+> a = a + 1                       # all channels increment
+> a
+RGB(3, 2, 2)
+> lightgoldenrodyellow            # X11/HTML constants
+RGB(250, 250, 210)
+> -a                              # inversion 
 RGB(252, 253, 253)
->
+> red.rotate(180) == -red == cyan # rotate hue in HSV space
+True
+> skyblue ; skyblue.brighter()    # brighter in HSV space
+RGB(135, 206, 235)
+RGB(136, 208, 237)
 ```
 
 #### Or pipe commands in
@@ -103,8 +102,8 @@ optional arguments:
 |      |  `!`   |
 |      |  `~`   |
 |      |  `^`   |
-|      |  `|`   |
-|      |  `&`   |
+|  ✓   |  `|`   |
+|  ✓   |  `&`   |
 |      |  `**`  |
 |      |  `%`   |
 

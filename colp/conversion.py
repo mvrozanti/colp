@@ -33,8 +33,8 @@ class Color(ABC):
         if normalise:
             return sum(self.get_dimensions(normalise=True)) / len(self.get_dimensions())
 
-    def brighter(self, factor=1):
-        return self.to(HSV).brighter(factor).to(self.__class__)
+    def brighter(self, factor=0.01):
+        return self.to(HSV).brighter(factor=factor).to(self.__class__)
 
     # def brighter(self, factor=1):
     #     o = self.to(RGB)
@@ -77,6 +77,12 @@ class Color(ABC):
 
     def __truediv__(self, o):
         return self.__mul__(1/o)
+
+    def __and__(self, o):
+        return self.to(RGB) & o
+
+    def __or__(self, o):
+        return self.to(RGB) | o
 
     def __mul__(self, o):
         return self.to(RGB) * o
@@ -135,6 +141,14 @@ class RGB(Color):
 
     def __truediv__(self, o):
         return self.__mul__(1/o)
+
+    def __and__(self, o):
+        if isinstance(o, (int,float)):
+            return RGB(*[s_i & o for s_i in self.get_dimensions(normalise=False)])
+
+    def __or__(self, o):
+        if isinstance(o, (int,float)):
+            return RGB(*[s_i | o for s_i in self.get_dimensions(normalise=False)])
 
     def __mul__(self, o):
         if isinstance(o, Color):

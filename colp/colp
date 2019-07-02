@@ -31,6 +31,10 @@ if __name__ == '__main__':
     for c in args.VAR:
         exec(c)
 
+    all_colors = by_name() # make sure to load before settting Color.MODE below
+    for c_name,c_var in all_colors.items():
+        locals()[c_name] = c_var
+
     Color.MODE = 'simple' if args.simple_mode else 'script'
 
     is_tty = sys.stdin.isatty()

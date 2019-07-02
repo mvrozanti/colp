@@ -128,11 +128,17 @@ def test_increase_brightness():
 
 def test_truediv_and_mul():
     print('\n')
-    print('truediv and mul')
+    print('/ and *')
     red = RGB(255,0,0)
     faded_red = red / 3
     assert faded_red == RGB(85,0,0)
     assert faded_red * 3 == red
     hsv_red = red.to(HSV)
     assert hsv_red / 3 == faded_red
+
+def test_and_or():
+    print('\n')
+    print('& and |')
+    red = RGB(255,0,0)
+    some_red = red & 3
 
