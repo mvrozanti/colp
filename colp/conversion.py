@@ -266,6 +266,8 @@ class RGB(Color):
 
     @visualizable
     def __add__(self, o): 
+        if isinstance(o, str):
+            return o + '%s' % self
         if isinstance(o, Color):
             o = o.to(RGB)
             rr = o.r + self.r

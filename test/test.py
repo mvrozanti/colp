@@ -158,6 +158,10 @@ def test_float_inversion():
     print('float inversion')
     a = RGB(1,100,1).to(HSV)
     assert isinstance(~a, HSV)
+    try:
+        print(~black)
+    except:
+        print("can't invert 0-containing channel for " + black)
     
 # https://stackoverflow.com/questions/16444726/binary-representation-of-float-in-python-bits-not-hex
 if __name__ == '__main__': 
