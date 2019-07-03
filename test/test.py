@@ -168,6 +168,13 @@ def test_floor_div():
     some_green = RGB(3,99,3)
     assert some_green // 3 == RGB(1,33,1)
     assert RGB(33,188,33) // some_green == RGB(11, 1, 11)
+
+def test_truth():
+    assert not black
+    darkest_red   = RGB(0,0,1)
+    darkest_green = RGB(0,1,0)
+    darkest_blue  = RGB(1,0,0)
+    assert darkest_red and darkest_green and darkest_blue
     
 # https://stackoverflow.com/questions/16444726/binary-representation-of-float-in-python-bits-not-hex
 if __name__ == '__main__': 

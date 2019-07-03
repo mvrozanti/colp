@@ -80,6 +80,10 @@ class Color(ABC):
             return b_i < b_o
 
     @visualizable
+    def __truth__(self):
+        return self != 0
+
+    @visualizable
     def __invert__(self):
         '''
         invert floating point
