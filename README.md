@@ -49,6 +49,7 @@ RGB(136, 208, 237)
 > a_set_of_colors.sort()
 > a_set_of_colors
 [RGB(25, 25, 112), HEX('#800080'), RGB(218, 112, 214), RGB(221, 160, 221), HSV(186, 23, 90), HEX('#ff00ff')]
+> cursor = black
 > def pop_and_turn(x):
 >       if x == RGB(0,0,0):
 >               x = x.redder() * 255
