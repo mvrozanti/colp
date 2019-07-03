@@ -49,12 +49,12 @@ class Color(ABC):
             return sum(self.get_dimensions(normalise=True)) / len(self.get_dimensions())
 
     @visualizable
-    def brighter(self, factor=0.01):
-        return self.to(HSV).brighter(factor=factor).to(self.__class__)
+    def brighter(self, factor=1.1):
+        return self.to(RGB).brighter(factor=factor).to(self.__class__)
 
     @visualizable
-    def darker(self):
-        return self.brighter(factor=-1)
+    def darker(self, factor=1.1):
+        return self.to(RGB).brighter(factor=factor).to(self.__class__)
 
     @visualizable
     def _inc_channel(self, chan_ix, factor=1):
@@ -168,6 +168,10 @@ class RGB(Color):
         return self.__mul__(1/o)
 
     @visualizable
+    def brighter(self, factor=2):
+        return self * factor
+
+    @visualizable
     def __and__(self, o):
         if isinstance(o, (int,float)):
             return RGB(*[s_i & o for s_i in self.get_dimensions(normalise=False)])
@@ -271,12 +275,6 @@ class HSV(Color):
         h += angle
         h %= 360
         return HSV(h, s, v, radians=radians)
-
-    @visualizable
-    def brighter(self, factor=0.01):
-        h,s,v = self.get_dimensions(normalise=True)
-        v += factor
-        return HSV(h, s, min(v, 1))
         
     def get_dimensions(self, normalise=False):
         if normalise:
@@ -288,7 +286,7 @@ class HSV(Color):
     def saturate(self, factor=0.01, normalise=True):
         h,s,v = self.get_dimensions(normalise=normalise)
         s = factor
-        return HSV(h, min(s,1), v)
+        return HSV(h, max(min(s,1), 0), v)
 
     def to(self, colorspace):
         if not colorspace or isinstance(self, colorspace): return self

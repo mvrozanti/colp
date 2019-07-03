@@ -106,6 +106,11 @@ optional arguments:
 |  ✓   |  `&`   |
 |      |  `**`  |
 |      |  `%`   |
+|      |  `<`   |
+|      |  `>`   |
+|      |  `<=`  |
+|      |  `>=`  |
+|  ✓   |  `==`  |
 
 ### Named Constants
 - [HTML 4.01 specification](https://en.wikipedia.org/wiki/Web_colors#HTML_color_names)

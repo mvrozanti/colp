@@ -104,7 +104,10 @@ def test__er_suffix_and_brightness():
     darkest_red   = RGB(0,0,0).redder()
     darkest_green = RGB(0,0,0).greener()
     darkest_blue  = RGB(0,0,0).bluer()
-    lightest_blue = cyan = RGB(254,255,255);
+    lightest_blue = RGB(254,255,255);
+    # import code
+    # code.interact(local=globals().update(locals()) or globals())
+    assert darkest_blue.brighter().darker() == darkest_blue
     print(darkest_red)
     print(darkest_green)
     print(darkest_blue)
@@ -141,9 +144,11 @@ def test_monochrome_check():
     darkest_gray = RGB(1,1,1)
     darkest_gray.is_monochrome()
 
-if __name__ == '__main__': # run tests with visualizer on
-    import tkinter as tk 
-    Color.visualizer = tk.Tk()
+# https://stackoverflow.com/questions/16444726/binary-representation-of-float-in-python-bits-not-hex
+if __name__ == '__main__': 
+    if False: # optionally run tests with visualizer
+        import tkinter as tk 
+        Color.visualizer = tk.Tk()
 
     for ptm in list(globals().keys()):
         if 'test' == ptm[:4]:
