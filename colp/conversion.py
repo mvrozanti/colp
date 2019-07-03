@@ -4,6 +4,7 @@ from functools import wraps
 import colorsys
 import copy
 import sys
+import ctypes
 
 def detect_normalised(may_be_normalised):
     return all([type(n) == float and 0 <= n <= 1 for n in may_be_normalised])
@@ -64,6 +65,7 @@ class Color(ABC):
         channels[chan_ix] %= 256
         return RGB(*channels).to(self.__class__) 
 
+    @visualizable
     def __lt__(self, o):
         '''
         compare in sense of brightness. The brightness of a color is the greatest value among the RGB channels
@@ -77,6 +79,16 @@ class Color(ABC):
             b_o = max(o.get_dimensions())
             return b_i < b_o
 
+    @visualizable
+    def __invert__(self):
+        '''
+        invert floating point
+        '''
+        inverted_chans_in_int = [~ctypes.c_uint.from_buffer(ctypes.c_float(chan)).value for chan in self.get_dimensions(normalise=True)]
+        abs_chans_float = [abs(ctypes.c_float.from_buffer(ctypes.c_int(chan)).value) % 1 for chan in inverted_chans_in_int]
+        return RGB(*abs_chans_float).to(self.__class__)
+
+    @visualizable
     def __le__(self, o):
         '''
         compare in sense of brightness. The brightness of a color is the greatest value among the RGB channels
@@ -90,6 +102,7 @@ class Color(ABC):
             b_o = max(o.get_dimensions())
             return b_i <= b_o
 
+    @visualizable
     def __ge__(self, o):
         '''
         compare in sense of brightness. The brightness of a color is the greatest value among the RGB channels
@@ -103,6 +116,7 @@ class Color(ABC):
             b_o = max(o.get_dimensions())
             return b_i >= b_o
 
+    @visualizable
     def __gt__(self, o):
         '''
         compare in sense of brightness. The brightness of a color is the greatest value among the RGB channels

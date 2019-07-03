@@ -152,6 +152,12 @@ def test_comparisons():
     assert HSV(3,6,3)     >= RGB(3,2,0)
     assert purple         <  129
     assert purple.to(HSV) <  129
+
+def test_float_inversion():
+    print('\n')
+    print('float inversion')
+    a = RGB(1,100,1).to(HSV)
+    assert isinstance(~a, HSV)
     
 # https://stackoverflow.com/questions/16444726/binary-representation-of-float-in-python-bits-not-hex
 if __name__ == '__main__': 
