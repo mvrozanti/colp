@@ -25,8 +25,8 @@ if __name__ == '__main__':
     readlines = lambda filename: (sys.stdin if filename == '-' else open(filename, 'r')).\
             readlines()
 
-    all_colors = by_name() # make sure to load before settting Color.MODE below
-    for c_name,c_var in all_colors.items():
+    colors = by_name() # make sure to load before processing any script
+    for c_name,c_var in colors.items():
         locals()[c_name] = c_var
 
     Color.MODE = 'simple' if args.simple_mode else 'script'

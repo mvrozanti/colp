@@ -80,7 +80,7 @@ class Color(ABC):
             return b_i < b_o
 
     @visualizable
-    def __truth__(self):
+    def __bool__(self):
         return self != 0
 
     @visualizable
@@ -206,13 +206,13 @@ class Color(ABC):
         return RGB(255,255,255) - self
 
     def __eq__(self, other):
-        if other is None: return False
+        if other is None: 
+            return False
         if isinstance(other, self.__class__) or isinstance(self, other.__class__):
             return self.get_dimensions() == other.get_dimensions()
-        elif isinstance(other, (int,float)):
+        if isinstance(other, (int,float)):
             return max(self.get_dimensions()) == other
-        else:
-            return other.to(self.__class__) == self
+        return other.to(self.__class__) == self
 
     def __repr__(self):
         return self.__class__.__name__  + str(tuple(self.get_dimensions()))

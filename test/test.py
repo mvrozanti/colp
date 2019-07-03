@@ -174,7 +174,12 @@ def test_truth():
     darkest_red   = RGB(0,0,1)
     darkest_green = RGB(0,1,0)
     darkest_blue  = RGB(1,0,0)
+    assert HSV(0,0,0) == black == 0
     assert darkest_red and darkest_green and darkest_blue
+
+def test_iall():
+    pass
+    # for c in colors:
     
 # https://stackoverflow.com/questions/16444726/binary-representation-of-float-in-python-bits-not-hex
 if __name__ == '__main__': 
