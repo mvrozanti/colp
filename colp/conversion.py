@@ -84,8 +84,11 @@ class Color(ABC):
         '''
         invert floating point
         '''
-        inverted_chans_in_int = [~ctypes.c_uint.from_buffer(ctypes.c_float(chan)).value for chan in self.get_dimensions(normalise=True)]
-        abs_chans_float = [abs(ctypes.c_float.from_buffer(ctypes.c_int(chan)).value) % 1 for chan in inverted_chans_in_int]
+        inverted_chans_in_int = [~ctypes.c_uint.from_buffer(ctypes.c_float(chan)).value for chan in self.get_dimensions(normalise=True)] # invert to signed int
+        abs_chans_float = [abs(ctypes.c_float.from_buffer(ctypes.c_int(chan)).value) % 1 for chan in inverted_chans_in_int] # back to absolute float
+        abs_chans_float = [c if c == c else 0. for c in abs_chans_float] # weed out nan values with c == c (https://stackoverflow.com/questions/944700/how-can-i-check-for-nan-values)
+        # import code
+        # code.interact(local=globals().update(locals()) or globals())
         return RGB(*abs_chans_float).to(self.__class__)
 
     @visualizable
