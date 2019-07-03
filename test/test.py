@@ -178,8 +178,21 @@ def test_truth():
     assert darkest_red and darkest_green and darkest_blue
 
 def test_iall():
-    pass
-    # for c in colors:
+    def against_int(a):
+        a = RGB(1,2,3)
+        a *= 3
+        a -= 3
+        a += 3
+        a /= 3
+        a %= 3
+        a **= 3
+        a ^= 3
+        a |= 3
+        a &= 3
+        a != 3
+        a >>= 3
+        a <<= 3
+        a <<= 3
     
 # https://stackoverflow.com/questions/16444726/binary-representation-of-float-in-python-bits-not-hex
 if __name__ == '__main__': 
