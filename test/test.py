@@ -156,12 +156,18 @@ def test_comparisons():
 def test_float_inversion():
     print('\n')
     print('float inversion')
+
     a = RGB(1,100,1).to(HSV)
     assert isinstance(~a, HSV)
-    try:
-        print(~black)
-    except:
-        print("can't invert 0-containing channel for " + black)
+
+    z = RGB(0,15,255)
+    z = ~z # test zero-containing channel
+    assert str(z)
+
+def test_floor_div():
+    some_green = RGB(3,99,3)
+    assert some_green // 3 == RGB(1,33,1)
+    assert RGB(33,188,33) // some_green == RGB(11, 1, 11)
     
 # https://stackoverflow.com/questions/16444726/binary-representation-of-float-in-python-bits-not-hex
 if __name__ == '__main__': 

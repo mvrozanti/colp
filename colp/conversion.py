@@ -168,6 +168,15 @@ class Color(ABC):
         return self.__mul__(1/o)
 
     @visualizable
+    def __floordiv__(self, o):
+        if isinstance(o, (int,float)):
+            return RGB(*[c // o for c in self.to(RGB).get_dimensions()]).to(self.__class__)
+        elif isinstance(o, Color):
+            o_dims = o.to(RGB).get_dimensions()
+            i_dims = self.to(RGB).get_dimensions()
+            return RGB(*[ic // oc for ic,oc in zip(i_dims, o_dims)])
+
+    @visualizable
     def __and__(self, o):
         return self.to(RGB) & o
 
