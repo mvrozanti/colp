@@ -64,6 +64,58 @@ class Color(ABC):
         channels[chan_ix] %= 256
         return RGB(*channels).to(self.__class__) 
 
+    def __lt__(self, o):
+        '''
+        compare in sense of brightness. The brightness of a color is the greatest value among the RGB channels
+        '''
+        if isinstance(o, (int,float)):
+            return max(self.to(RGB).get_dimensions()) < o
+        if isinstance(o, Color):
+            i = self.to(RGB)
+            o = o.to(RGB)
+            b_i = max(i.get_dimensions())
+            b_o = max(o.get_dimensions())
+            return b_i < b_o
+
+    def __le__(self, o):
+        '''
+        compare in sense of brightness. The brightness of a color is the greatest value among the RGB channels
+        '''
+        if isinstance(o, (int,float)):
+            return max(self.get_dimensions()) <= o
+        if isinstance(o, Color):
+            i = self.to(RGB)
+            o = o.to(RGB)
+            b_i = max(i.get_dimensions())
+            b_o = max(o.get_dimensions())
+            return b_i <= b_o
+
+    def __ge__(self, o):
+        '''
+        compare in sense of brightness. The brightness of a color is the greatest value among the RGB channels
+        '''
+        if isinstance(o, (int,float)):
+            return max(self.get_dimensions()) >= o
+        if isinstance(o, Color):
+            i = self.to(RGB)
+            o = o.to(RGB)
+            b_i = max(i.get_dimensions())
+            b_o = max(o.get_dimensions())
+            return b_i >= b_o
+
+    def __gt__(self, o):
+        '''
+        compare in sense of brightness. The brightness of a color is the greatest value among the RGB channels
+        '''
+        if isinstance(o, (int,float)):
+            return max(self.get_dimensions()) > o
+        if isinstance(o, Color):
+            i = self.to(RGB)
+            o = o.to(RGB)
+            b_i = max(i.get_dimensions())
+            b_o = max(o.get_dimensions())
+            return b_i > b_o
+
     @visualizable
     def redder(self, factor=1):
         return self._inc_channel(0, factor=factor)
@@ -127,6 +179,8 @@ class Color(ABC):
         if other is None: return False
         if isinstance(other, self.__class__) or isinstance(self, other.__class__):
             return self.get_dimensions() == other.get_dimensions()
+        elif isinstance(other, (int,float)):
+            return max(self.get_dimensions()) == other
         else:
             return other.to(self.__class__) == self
 

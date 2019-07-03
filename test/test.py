@@ -4,6 +4,10 @@ import sys
 sys.path.append('..')
 from colp import Color,RGB,HSV,HEX,by_name
 
+all_colors = by_name() # make sure to load before settting Color.MODE below
+for c_name,c_var in all_colors.items():
+    globals()[c_name] = c_var
+
 # def hook(hookfunc, oldfunc):
 #     def foo(*args, **kwargs):
 #         hookfunc(*args, **kwargs)
@@ -105,13 +109,9 @@ def test__er_suffix_and_brightness():
     darkest_green = RGB(0,0,0).greener()
     darkest_blue  = RGB(0,0,0).bluer()
     lightest_blue = RGB(254,255,255);
-    # import code
-    # code.interact(local=globals().update(locals()) or globals())
-    assert darkest_blue.brighter().darker() == darkest_blue
     print(darkest_red)
     print(darkest_green)
     print(darkest_blue)
-    # assert darkest_red.brightness() == darkest_green.brightness() == darkest_blue.brightness() > 0
     assert -darkest_red == lightest_blue
     assert darkest_red.brightness() == darkest_green.brightness() == darkest_blue.brightness() == 1/(255*3)
 
@@ -144,8 +144,18 @@ def test_monochrome_check():
     darkest_gray = RGB(1,1,1)
     darkest_gray.is_monochrome()
 
+def test_comparisons():
+    assert RGB(255,0,127) >  RGB(200,200,200)
+    assert RGB(1,2,3)     <  RGB(4,2,0)
+    assert RGB(3,3,3)     <= RGB(3,2,0)
+    assert RGB(3,6,3)     >= RGB(3,2,0)
+    assert HSV(3,6,3)     >= RGB(3,2,0)
+    assert purple         <  129
+    assert purple.to(HSV) <  129
+    
 # https://stackoverflow.com/questions/16444726/binary-representation-of-float-in-python-bits-not-hex
 if __name__ == '__main__': 
+
     if False: # optionally run tests with visualizer
         import tkinter as tk 
         Color.visualizer = tk.Tk()
