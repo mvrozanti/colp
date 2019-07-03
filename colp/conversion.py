@@ -270,6 +270,9 @@ class RGB(Color):
             return RGB(*rgb)
         raise('Invalid addition')
 
+    # def __repr__(self):
+    #     return 'RGB(%3d,%3d,%3d)' % tuple(self.get_dimensions())
+
 class HEX(RGB):
 
     def __init__(self, str_repr):

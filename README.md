@@ -44,6 +44,30 @@ True
 > skyblue ; skyblue.brighter()    # brighter in HSV space
 RGB(135, 206, 235)
 RGB(136, 208, 237)
+
+> a_set_of_colors = [RGB(25,25,112), HSV(186,23,90), plum, orchid, fuchsia, HEX('#800080')]
+> a_set_of_colors.sort()
+> a_set_of_colors
+[RGB(25, 25, 112), HEX('#800080'), RGB(218, 112, 214), RGB(221, 160, 221), HSV(186, 23, 90), HEX('#ff00ff')]
+> def pop_and_turn(x):
+>       if x == RGB(0,0,0):
+>               x = x.redder() * 255
+>       return x.rotate(30)
+> for i in range(10):
+>       cursor = pop_and_turn(cursor)
+>       print(cursor)
+>
+RGB(255, 0, 127)
+RGB(255, 0, 0)
+RGB(255, 127, 0)
+RGB(255, 255, 0)
+RGB(127, 255, 0)
+RGB(0, 255, 0)
+RGB(0, 255, 127)
+RGB(0, 255, 255)
+RGB(0, 127, 255)
+RGB(0, 0, 255)
+
 ```
 
 #### Or pipe commands in
@@ -106,10 +130,10 @@ optional arguments:
 |  ✓   |  `&`   |
 |      |  `**`  |
 |      |  `%`   |
-|      |  `<`   |
-|      |  `>`   |
-|      |  `<=`  |
-|      |  `>=`  |
+|  ✓   |  `<`   |
+|  ✓   |  `>`   |
+|  ✓   |  `<=`  |
+|  ✓   |  `>=`  |
 |  ✓   |  `==`  |
 
 ### Named Constants
