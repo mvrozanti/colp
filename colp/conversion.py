@@ -219,13 +219,13 @@ class Color(ABC):
             return RGB(*[ic ** oc for ic,oc in zip(i_dims, o_dims)]).to(self.__class__)
 
     @visualizable
-    def __pow__(self, o):
+    def __mod__(self, o):
         if isinstance(o, (int,float)):
-            return RGB(*[c ** o for c in self.to(RGB).get_dimensions()]).to(self.__class__) 
+            return RGB(*[c % o for c in self.to(RGB).get_dimensions()]).to(self.__class__) 
         if isinstance(o, Color):
             o_dims = o.to(RGB).get_dimensions()
             i_dims = self.to(RGB).get_dimensions()
-            return RGB(*[ic ** oc for ic,oc in zip(i_dims, o_dims)]).to(self.__class__)
+            return RGB(*[ic % oc for ic,oc in zip(i_dims, o_dims)]).to(self.__class__)
 
     @visualizable
     def __and__(self, o):
