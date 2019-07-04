@@ -181,6 +181,9 @@ def test_xor_and_getitem():
     some_red = RGB(128,64,32)
     some_other_red = some_red ^ 65
     assert some_other_red[1] == 1
+    some_blue = RGB(64,32,128)
+    abomination = some_red ^ some_blue
+    abomination == RGB(192, 96, 160)
     
 # https://stackoverflow.com/questions/16444726/binary-representation-of-float-in-python-bits-not-hex
 if __name__ == '__main__': 
