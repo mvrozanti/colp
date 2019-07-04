@@ -105,6 +105,10 @@ class Color(ABC):
         return dims.index(max(dims)) == 2
 
     @visualizable
+    def __bool__(self):
+        return self != 0
+
+    @visualizable
     def __truth__(self):
         return self != 0
 
@@ -200,10 +204,28 @@ class Color(ABC):
     def __floordiv__(self, o):
         if isinstance(o, (int,float)):
             return RGB(*[c // o for c in self.to(RGB).get_dimensions()]).to(self.__class__)
-        elif isinstance(o, Color):
+        if isinstance(o, Color):
             o_dims = o.to(RGB).get_dimensions()
             i_dims = self.to(RGB).get_dimensions()
-            return RGB(*[ic // oc for ic,oc in zip(i_dims, o_dims)])
+            return RGB(*[ic // oc for ic,oc in zip(i_dims, o_dims)]).to(self.__class__)
+
+    @visualizable
+    def __pow__(self, o):
+        if isinstance(o, (int,float)):
+            return RGB(*[c ** o for c in self.to(RGB).get_dimensions()]).to(self.__class__) 
+        if isinstance(o, Color):
+            o_dims = o.to(RGB).get_dimensions()
+            i_dims = self.to(RGB).get_dimensions()
+            return RGB(*[ic ** oc for ic,oc in zip(i_dims, o_dims)]).to(self.__class__)
+
+    @visualizable
+    def __pow__(self, o):
+        if isinstance(o, (int,float)):
+            return RGB(*[c ** o for c in self.to(RGB).get_dimensions()]).to(self.__class__) 
+        if isinstance(o, Color):
+            o_dims = o.to(RGB).get_dimensions()
+            i_dims = self.to(RGB).get_dimensions()
+            return RGB(*[ic ** oc for ic,oc in zip(i_dims, o_dims)]).to(self.__class__)
 
     @visualizable
     def __and__(self, o):
@@ -219,10 +241,12 @@ class Color(ABC):
 
     @visualizable
     def __sub__(self, o):
-        new_dims = o.to(self.__class__).get_dimensions(normalise=True)
-        for i in range(len(new_dims)):
-            new_dims[i] = abs(new_dims[i] - self.get_dimensions(normalise=True)[i])
-        return self.__class__(*new_dims)
+        if isinstance(o, (int,float)):
+            return self.__add__(-o)
+        if isinstance(o, Color):
+            o = o.to(RGB)
+            i = self.to(RGB)
+            return RGB(*[abs(ic - oc) for ic,oc in zip(o,i)])
 
     def __getitem__(self, i):
         return self.get_dimensions()[i]
@@ -250,10 +274,14 @@ class RGB(Color):
         self.b = b;
         self.a = a;
         if not detect_normalised([r,g,b]):
+            self.r %= 256;
+            self.g %= 256;
+            self.b %= 256;
             self.r /= 255;
             self.g /= 255;
             self.b /= 255;
         if not detect_normalised([a]):
+            self.a %= 255;
             self.a /= 255;
 
     def get_dimensions(self, normalise=False):

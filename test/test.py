@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-import unittest
+import pytest
 import sys
 sys.path.append('..')
 from colp import Color,RGB,HSV,HEX,by_name
@@ -184,6 +184,20 @@ def test_xor_and_getitem():
     some_blue = RGB(64,32,128)
     abomination = some_red ^ some_blue
     abomination == RGB(192, 96, 160)
+
+def test_iall():
+    print('\n')
+    print('iall')
+    a = RGB(1,2,3)
+    a *= 2
+    a += 2
+    a -= 2
+    a /= 2
+    a ^= 2
+    a &= 2
+    a |= 3
+    a **= 9
+    a %= 9
     
 # https://stackoverflow.com/questions/16444726/binary-representation-of-float-in-python-bits-not-hex
 if __name__ == '__main__': 
