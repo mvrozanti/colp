@@ -200,8 +200,6 @@ def test_iall():
     a %= 9
     a <<= 9
     a >>= 9
-    a <<= 9
-    a <<= 9
     
 # https://stackoverflow.com/questions/16444726/binary-representation-of-float-in-python-bits-not-hex
 if __name__ == '__main__': 
