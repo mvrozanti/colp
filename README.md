@@ -1,5 +1,5 @@
 # colp 
-[![Build Status](https://travis-ci.com/mvrozanti/colp.svg?token=Hrxne9dbhCC141HWAM1p&branch=colpy)](https://travis-ci.com/mvrozanti/colp)
+[![Build Status](https://travis-ci.com/mvrozanti/colp.svg?token=Hrxne9dbhCC141HWAM1p&branch=master)](https://travis-ci.com/mvrozanti/colp)
 [![PyPI](https://img.shields.io/pypi/v/colp.svg)](https://pypi.org/project/colp/)
 
 
@@ -126,9 +126,8 @@ optional arguments:
 |  ✓   |  `*`   |
 |  ✓   |  `/`   |
 |  ✓   |  `//`  |
-|      |  `!`   |
 |  ✓   |  `~`   |
-|      |  `^`   |
+|  ✓   |  `^`   |
 |  ✓   |  `|`   |
 |  ✓   |  `&`   |
 |      |  `**`  |

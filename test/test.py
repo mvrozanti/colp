@@ -177,22 +177,10 @@ def test_truth():
     assert HSV(0,0,0) == black == 0
     assert darkest_red and darkest_green and darkest_blue
 
-def test_iall():
-    def against_int(a):
-        a = RGB(1,2,3)
-        a *= 3
-        a -= 3
-        a += 3
-        a /= 3
-        a %= 3
-        a **= 3
-        a ^= 3
-        a |= 3
-        a &= 3
-        a != 3
-        a >>= 3
-        a <<= 3
-        a <<= 3
+def test_xor_and_getitem():
+    some_red = RGB(128,64,32)
+    some_other_red = some_red ^ 65
+    assert some_other_red[1] == 1
     
 # https://stackoverflow.com/questions/16444726/binary-representation-of-float-in-python-bits-not-hex
 if __name__ == '__main__': 
