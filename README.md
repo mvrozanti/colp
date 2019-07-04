@@ -3,7 +3,7 @@
 [![Coverage Status](https://coveralls.io/repos/github/mvrozanti/colp/badge.svg)](https://coveralls.io/github/mvrozanti/colp)
 [![PyPI](https://img.shields.io/pypi/v/colp.svg)](https://pypi.org/project/colp/)
 [![Made with Python](https://img.shields.io/badge/Made%20with-Python-3572A5.svg)](https://travis-ci.org/mvrozanti/RAT-via-Telegram)
-[![PRs wlecome](https://img.shields.io/badge/PRs-welcome-green.svg?style=flat-square)](https://travis-ci.org/mvrozanti/colp)
+[![PRs welcome](https://img.shields.io/badge/PRs-welcome-66917a.svg)](https://github.com/mvrozanti/colp#Contributing)
 
 The color processor 
 
@@ -143,7 +143,7 @@ optional arguments:
 |    |    |    |     |
 |----|----|----|-----|
 |`-` |`+` |`*` |`/`  |
-|`//`|`~` |`^` |`|`  |
+|`//`|`~` |`^` |`\|`  |
 |`&` |`**`|`%` |`>>` | 
 |`<<`|`<` |`>` |`<=` |
 |`>=`|`==`|`is`|`not`|
