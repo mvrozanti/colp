@@ -1,7 +1,7 @@
 # colp 
 [![Build Status](https://travis-ci.com/mvrozanti/colp.svg?token=Hrxne9dbhCC141HWAM1p&branch=master)](https://travis-ci.com/mvrozanti/colp)
 [![PyPI](https://img.shields.io/pypi/v/colp.svg)](https://pypi.org/project/colp/)
-
+[![Made with Python](https://img.shields.io/badge/Made%20with-Python-3572A5.svg)](https://travis-ci.org/mvrozanti/RAT-via-Telegram)
 
 The color processor 
 
@@ -120,8 +120,7 @@ Color
 ### Formal Parameters
 
 ```
-usage: colp [-h] [-n] [-v VISUALIZER] [-s] [-S] [-l SCRIPT_FILE]
-            [VAR [VAR ...]]
+usage: colp [-h] [-n] [-v] [-c] [-s] [-l SCRIPT_FILE] [VAR [VAR ...]]
 
 Color Processor
 
@@ -131,10 +130,9 @@ positional arguments:
 optional arguments:
   -h, --help            show this help message and exit
   -n, --no-banner       don't show banner on interactive mode
-  -v VISUALIZER, --visualizer VISUALIZER
-                        visualize current color processed
-  -s, --simple-mode     css-compliant output
-  -S, --scripting-mode  colp script output
+  -v, --visualizer      visualize current color processed
+  -c, --css-mode        css-compliant output
+  -s, --scripting-mode  colp script output, which can be reinterpreted by colp
   -l SCRIPT_FILE, --load-script SCRIPT_FILE
                         load script from file or stdin
 ```

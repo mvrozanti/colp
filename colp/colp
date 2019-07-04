@@ -15,8 +15,8 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(prog='colp' , description='Color Processor')
     parser.add_argument('-n'                     , '--no-banner'                  , action='store_true'                       , help='don\'t show  banner on interactive mode')
     parser.add_argument('-v'                     , '--visualizer'                 , action='store_true'                       , help='visualize current color processed')
-    parser.add_argument('-s'                     , '--simple-mode'                , action='store_true'                       , help='css-compliant output')
-    parser.add_argument('-S'                     , '--scripting-mode'             , action='store_true'                       , default=True                                    , help='colp script output')
+    parser.add_argument('-c'                     , '--css-mode'                   , action='store_true'                       , help='css-compliant output')
+    parser.add_argument('-s'                     , '--scripting-mode'             , action='store_true'                       , default=True                                    , help='colp script output, which can be reinterpreted by colp')
     # parser.add_argument('-d'                   , '--debug'                      ,                                           , help='stop ')
     parser.add_argument('-l'                     , '--load-script'                , metavar='SCRIPT_FILE'                     , help='load script from file or stdin')
     parser.add_argument('VAR'                    , nargs='*'                      , help='arbitrary python code execution')
@@ -30,7 +30,7 @@ if __name__ == '__main__':
     for c_name,c_var in colors.items():
         locals()[c_name] = c_var
 
-    Color.MODE = 'simple' if args.simple_mode else 'script'
+    Color.MODE = 'css' if args.css_mode else 'script'
 
     for c in args.VAR:
         exec(c)

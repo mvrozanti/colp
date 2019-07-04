@@ -14,7 +14,7 @@ def visualizable(func):
     def wrapper(self, *args, **kwargs):
         try:
             if Color.visualizer:
-                Color.visualizer.configure(background=self.to(HEX).__repr__('simple'))
+                Color.visualizer.configure(background=self.to(HEX).__repr__('css'))
         except Exception as e: print(e)
         return func(self, *args, **kwargs)
     return wrapper
@@ -23,8 +23,8 @@ class Color(ABC):
 
     visualizer = None
 
-    MODES = ['script', 'simple']
-    # MODE = 'simple'
+    MODES = ['script', 'css']
+    # MODE = 'css'
     MODE = 'script'
 
     @abstractmethod
