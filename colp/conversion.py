@@ -86,8 +86,23 @@ class Color(ABC):
         if isinstance(o, Color):
             o = o.to(RGB)
             o_dims = o.get_dimensions()
-            i_dims = i.get_dimensions()
+            i_dims = self.get_dimensions()
             return RGB(*[ic ^ oc for ic,oc in zip(o_dims, i_dims)])
+
+    @visualizable
+    def is_red():
+        dims = self.to(RGB).get_dimensions()
+        return dims.index(max(dims)) == 0
+
+    @visualizable
+    def is_green():
+        dims = self.to(RGB).get_dimensions()
+        return dims.index(max(dims)) == 1
+
+    @visualizable
+    def is_blue():
+        dims = self.to(RGB).get_dimensions()
+        return dims.index(max(dims)) == 2
 
     @visualizable
     def __truth__(self):
