@@ -46,8 +46,7 @@ RGB(135, 206, 235)
 RGB(136, 208, 237)
 
 > a_set_of_colors = [RGB(25,25,112), HSV(186,23,90), plum, orchid, fuchsia, HEX('#800080')]
-> a_set_of_colors.sort()
-> a_set_of_colors
+> sorted(a_set_of_colors)
 [RGB(25, 25, 112), HEX('#800080'), RGB(218, 112, 214), RGB(221, 160, 221), HSV(186, 23, 90), HEX('#ff00ff')]
 >
 > cursor = RGB(0,0,0)             # define your own custom functions
@@ -95,6 +94,28 @@ outputs:
 ```
 HEX('#010203')
 ```
+
+### Class Hierarchy
+```
+Color
+├── RGB
+│   ├── HEX
+│   └── CMYK
+├── YIQ
+│   ├── YUV 
+│   ├── YPbPr
+│   ├── YDbDr
+│   └── YCbCr
+│       └── xvYCC
+├── CIE
+│   ├── CIELAB
+│   ├── CIELCh
+│   ├── CIEUVW
+│   └── CIEXYZ
+└── HSV = HSD = HSB = HSI
+    └── HSL
+```
+
 
 ### Formal Parameters
 
@@ -144,13 +165,17 @@ optional arguments:
 |----------------------|----------------------|
 |  ✓  RGB/RGBA/HEX:    | ✓ HSV=HSB=HSI=HSD:   |
 |<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/RGB_Cube_Show_lowgamma_cutout_a.png/1280px-RGB_Cube_Show_lowgamma_cutout_a.png" alt="drawing" width="300"/>|<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/HSV_color_solid_cylinder_saturation_gray.png/1280px-HSV_color_solid_cylinder_saturation_gray.png" alt="drawing" width="300"/>|
-| HSL:                 | CMY[K]               |
+| HSL:                 | CMY[K]:              |
 |<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/HSL_color_solid_cylinder_saturation_gray.png/1280px-HSL_color_solid_cylinder_saturation_gray.png" alt="drawing" width="300"/>|<img src="https://i.imgur.com//Bwi2zUi.png" alt="drawing" width="300"/>|
-| [CIE]LAB             | YCbCr                |
+| [CIE]LAB:            | YCbCr:               |
 | <img src="https://upload.wikimedia.org/wikipedia/commons/0/06/CIELAB_color_space_top_view.png" alt="drawing" width="300"/>|<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/YCbCr-CbCr_Scaled_Y50.png/1024px-YCbCr-CbCr_Scaled_Y50.png" alt="drawing" width="300"/>|
-| YIQ                  | YUV                  |
+| YIQ:                 | YUV:                 |
 |<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/YIQ_IQ_plane.svg/1024px-YIQ_IQ_plane.svg.png" alt="drawing" width="300"/>|<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/YUV_UV_plane.svg/1024px-YUV_UV_plane.svg.png" alt="drawing" width="300"/>|
 
 ### Contributing
 
-- There's definitely some room for automating CSS-file editing.
+There are many other useful colorspaces to convert to and only some are listed in this README.
+To cover a new colorspace, just add a class that extends `Color` or, even better, a `Color` subclass.
+There's also definitely some room for automating CSS-file editing.
+
+Pull requests are welcomed!
