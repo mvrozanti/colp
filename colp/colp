@@ -5,6 +5,7 @@ import code
 import os.path as op
 import readline
 import sys
+import random
 banner = """
 \033[95m┌─┐┌─┐┬  ┬─┐
 \033[92m│  │ ││  │─┘
