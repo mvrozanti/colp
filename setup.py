@@ -6,7 +6,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
      name='colp',  
-     version='1.7',
+     version='0.0.1',
      author="Marcelo V. Rozanti",
      author_email="mvrozanti@hotmail.com",
      description="Color Processor",
