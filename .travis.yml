@@ -14,3 +14,5 @@ script:
   - pytest test/test.py
   - pip install colp
   - echo 'a=RGB(1,2,3)' | colp 
+after_success:
+  - coveralls
