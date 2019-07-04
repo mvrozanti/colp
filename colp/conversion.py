@@ -80,6 +80,16 @@ class Color(ABC):
             return b_i < b_o
 
     @visualizable
+    def __xor__(self, o):
+        if isinstance(o, int):
+            return RGB(*[d ^ o for d in self.to(RGB).get_dimensions()]).to(self.__class__)
+        if isinstance(o, Color):
+            o = o.to(RGB)
+            o_dims = o.get_dimensions()
+            i_dims = i.get_dimensions()
+            return RGB(*[ic ^ oc for ic,oc in zip(o_dims, i_dims)])
+
+    @visualizable
     def __truth__(self):
         return self != 0
 
