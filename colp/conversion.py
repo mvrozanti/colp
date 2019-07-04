@@ -211,12 +211,7 @@ class Color(ABC):
 
     @visualizable
     def __pow__(self, o):
-        if isinstance(o, (int,float)):
-            return RGB(*[c ** o for c in self.to(RGB).get_dimensions()]).to(self.__class__) 
-        if isinstance(o, Color):
-            o_dims = o.to(RGB).get_dimensions()
-            i_dims = self.to(RGB).get_dimensions()
-            return RGB(*[ic ** oc for ic,oc in zip(i_dims, o_dims)]).to(self.__class__)
+        return self.rotate(o)
 
     @visualizable
     def __lshift__(self, o):
@@ -266,12 +261,15 @@ class Color(ABC):
             i = self.to(RGB)
             return RGB(*[abs(ic - oc) for ic,oc in zip(o,i)])
 
+    @visualizable
     def __getitem__(self, i):
         return self.get_dimensions()[i]
 
+    @visualizable
     def __neg__(self):
         return RGB(255,255,255) - self
 
+    @visualizable
     def __eq__(self, other):
         if other is None: 
             return False
