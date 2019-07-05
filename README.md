@@ -1,5 +1,6 @@
 # colp 
-[![PRs welcome](https://img.shields.io/badge/PRs-welcome-3572A5.svg)](https://github.com/mvrozanti/colp#Contributing)
+[![Made with Python](https://img.shields.io/badge/Made%20with-Python-3572A5.svg)](https://github.com/mvrozanti/colp/blob/master/colp/colp)
+[![PRs welcome](https://img.shields.io/badge/PRs-welcome-65F2F5.svg)](https://github.com/mvrozanti/colp#Contributing)
 [![Build Status](https://travis-ci.com/mvrozanti/colp.svg?token=Hrxne9dbhCC141HWAM1p&branch=master)](https://travis-ci.com/mvrozanti/colp)
 [![Coverage Status](https://coveralls.io/repos/github/mvrozanti/colp/badge.svg)](https://coveralls.io/github/mvrozanti/colp)
 [![PyPI](https://img.shields.io/pypi/v/colp.svg)](https://pypi.org/project/colp/)
