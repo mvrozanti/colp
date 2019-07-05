@@ -70,7 +70,8 @@ RGB(0, 255, 127)
 RGB(0, 255, 255)
 RGB(0, 127, 255)
 RGB(0, 0, 255)
-
+> red.interpolate(blue, 10)
+[HEX('#ff0000'), HEX('#e50019'), HEX('#cc0033'), HEX('#b2004c'), HEX('#990066'), HEX('#7f007f'), HEX('#660099'), HEX('#4c00b2'), HEX('#3300cc'), HEX('#1900e5'), HEX('#0000ff')]
 ```
 
 #### Or pipe commands in
