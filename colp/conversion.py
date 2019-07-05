@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 from abc import ABC, abstractmethod
+from collections.abc import Iterable
 from functools import wraps
 import colorsys
 import copy
@@ -43,6 +44,8 @@ class Color(ABC):
 
     @visualizable
     def interpolate(self, o, n):
+        if isinstance(o, Iterable):
+            return [self.interpolate(c, n) for c in o]
         n -= 1
         delta_perc = 100/n
         res = []
