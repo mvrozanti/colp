@@ -200,6 +200,14 @@ def test_iall():
     a %= 9
     a <<= 9
     a >>= 9
+
+def test_interpolate():
+    print('\n')
+    print('interpolate')
+    inclusive_between = blue.interpolate(red, 10)
+    assert inclusive_between[0] == blue
+    assert inclusive_between[-1] == red
+    assert inclusive_between[5][0] == inclusive_between[5][2] 
     
 # https://stackoverflow.com/questions/16444726/binary-representation-of-float-in-python-bits-not-hex
 if __name__ == '__main__': 
