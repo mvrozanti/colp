@@ -11,6 +11,14 @@ python:
 - '3.6'
 - 3.6-dev
 matrix:
+  include:
+  - os: osx
+    language: minimal
+  - os: windows
+    language: minimal
+    before_install:
+    - choco install python3
+    - export PATH="/c/Python37:/c/Python37/Scripts:$PATH"
   allow_failures:
     - python: '2.7'
 script:
