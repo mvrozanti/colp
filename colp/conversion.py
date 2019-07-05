@@ -104,17 +104,17 @@ class Color(ABC):
             return RGB(*[ic ^ oc for ic,oc in zip(o_dims, i_dims)])
 
     @visualizable
-    def is_red():
+    def is_red(self):
         dims = self.to(RGB).get_dimensions()
         return dims.index(max(dims)) == 0
 
     @visualizable
-    def is_green():
+    def is_green(self):
         dims = self.to(RGB).get_dimensions()
         return dims.index(max(dims)) == 1
 
     @visualizable
-    def is_blue():
+    def is_blue(self):
         dims = self.to(RGB).get_dimensions()
         return dims.index(max(dims)) == 2
 
