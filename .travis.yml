@@ -21,3 +21,5 @@ script:
   - pip install colp coveralls pytest-cov
   - pytest --cov colp test/test.py 
   - echo 'a=RGB(1,2,3)' | colp 
+after_success:
+  - coveralls
