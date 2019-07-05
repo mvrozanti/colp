@@ -6,6 +6,7 @@ import os.path as op
 import readline
 import sys
 import random
+import time
 banner = """
 \033[95m┌─┐┌─┐┬  ┬─┐
 \033[92m│  │ ││  │─┘
@@ -30,6 +31,10 @@ if __name__ == '__main__':
     for c_name,c_var in colors.items():
         locals()[c_name] = c_var
 
+    def sleep(n):
+        Color.visualizer.update
+        time.sleep(n)
+
     Color.MODE = 'css' if args.css_mode else 'script'
 
     for c in args.VAR:
@@ -43,6 +48,7 @@ if __name__ == '__main__':
     if args.visualizer:
         import tkinter as tk 
         Color.visualizer = tk.Tk() 
+        Color.visualizer.title('colp')
 
     def readfunc(prompt):
         return input('> ' if is_tty else '')
