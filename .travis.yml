@@ -45,9 +45,8 @@ matrix:
     - os: linux
   allow_failures:
     - python: '2.7'
-    - os: 
-      - windows
-      - osx
+    - os: windows
+    - os: osx
 
 script:
   - pip install -r requirements.txt
