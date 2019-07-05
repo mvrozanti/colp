@@ -2,7 +2,7 @@
 [![Made with Python](https://img.shields.io/badge/Made%20with-Python-3572A5.svg)](https://github.com/mvrozanti/colp/blob/master/colp/colp)
 [![PRs welcome](https://img.shields.io/badge/PRs-welcome-65F2F5.svg)](https://github.com/mvrozanti/colp#Contributing)
 [![Build Status](https://travis-ci.com/mvrozanti/colp.svg?token=Hrxne9dbhCC141HWAM1p&branch=master)](https://travis-ci.com/mvrozanti/colp)
-[![Coverage Status](https://coveralls.io/repos/github/mvrozanti/colp/badge.svg)](https://coveralls.io/github/mvrozanti/colp)
+[![Coverage Status](https://coveralls.io/repos/github/mvrozanti/colp/badge.svg?branch=master)](https://coveralls.io/github/mvrozanti/colp?branch=master)
 [![PyPI](https://img.shields.io/pypi/v/colp.svg)](https://pypi.org/project/colp/)
 
 The color processor 
@@ -53,7 +53,7 @@ RGB(136, 208, 237)
 >
 > cursor = RGB(0,0,0)             # define your own custom functions
 > def pop_and_turn(x):
->       if x: 
+>       if x: # equivalent to RGB(0,0,0) == 0
 >             x = x.redder() * 255
 >       return x.rotate(30)
 > 
@@ -149,7 +149,7 @@ optional arguments:
 |`<<`|`<` |`>` |`<=` |
 |`>=`|`==`|`is`|`not`|
 
-### Named Constants
+### Named Constants (140)
 - [HTML 4.01 specification](https://en.wikipedia.org/wiki/Web_colors#HTML_color_names)
 - [X11 color names](https://en.wikipedia.org/wiki/Web_colors#)
 
