@@ -1,8 +1,8 @@
 # colp 
+[![PRs welcome](https://img.shields.io/badge/PRs-welcome-3572A5.svg)](https://github.com/mvrozanti/colp#Contributing)
 [![Build Status](https://travis-ci.com/mvrozanti/colp.svg?token=Hrxne9dbhCC141HWAM1p&branch=master)](https://travis-ci.com/mvrozanti/colp)
 [![Coverage Status](https://coveralls.io/repos/github/mvrozanti/colp/badge.svg)](https://coveralls.io/github/mvrozanti/colp)
 [![PyPI](https://img.shields.io/pypi/v/colp.svg)](https://pypi.org/project/colp/)
-[![PRs welcome](https://img.shields.io/badge/PRs-welcome-3572A5.svg)](https://github.com/mvrozanti/colp#Contributing)
 
 The color processor 
 
