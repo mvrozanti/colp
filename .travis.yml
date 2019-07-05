@@ -1,4 +1,8 @@
 language: python
+os: 
+  - linux
+  - osx
+  - windows
 python:
 - '2.7'
 - '3.4'
@@ -6,18 +10,17 @@ python:
 - 3.5-dev
 - '3.6'
 - 3.6-dev
-
-include:
-  - os: osx
-    language: minimal
-  - os: windows
-    language: sh
-    before_install:
-    - choco install python
-    - python -m pip install --upgrade pip
-    - export PATH="/c/Python37:/c/Python37/Scripts:$PATH"
-
 matrix:
+  include:
+    - os: osx
+      language: minimal
+    - os: windows
+      language: sh
+      before_install:
+      - choco install python
+      - python -m pip install --upgrade pip
+      - export PATH="/c/Python37:/c/Python37/Scripts:$PATH"
+    - os: linux
   allow_failures:
     - python: '2.7'
     - os: windows
