@@ -208,6 +208,11 @@ def test_interpolate():
     assert inclusive_between[0] == blue
     assert inclusive_between[-1] == red
     assert inclusive_between[5][0] == inclusive_between[5][2] 
+
+def test_is_major():
+    assert RGB(120,119,100).is_red()
+    assert RGB(119,120,100).is_green()
+    assert RGB(119,120,130).is_blue()
     
 # https://stackoverflow.com/questions/16444726/binary-representation-of-float-in-python-bits-not-hex
 if __name__ == '__main__': 
