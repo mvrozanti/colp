@@ -21,6 +21,7 @@ if __name__ == '__main__':
     parser.add_argument('-s'                     , '--scripting-mode'             , action='store_true'                       , default=True                                    , help='colp script output, which can be reinterpreted by colp')
     # parser.add_argument('-d'                   , '--debug'                      ,                                           , help='stop ')
     parser.add_argument('-l'                     , '--load-script'                , metavar='SCRIPT_FILE'                     , help='load script from file or stdin')
+    parser.add_argument('-N'                     , '--named-constants'   , nargs='*'   , metavar='[HTML | X11 | BOTH]'             , help='use named constants when one is being processsed. Choose either HTML, X11 or BOTH')
     parser.add_argument('VAR'                    , nargs='*'                      , help='arbitrary python code execution')
 
     args = parser.parse_args()
@@ -37,6 +38,9 @@ if __name__ == '__main__':
         time.sleep(n)
 
     Color.MODE = 'css' if args.css_mode else 'script'
+
+    if args.named_constants is not None:
+        Color.USE_CONSTS = 'BOTH' if args.named_constants == [] else args.named_constants 
 
     for c in args.VAR:
         exec(c)

@@ -30,6 +30,8 @@ class Color(ABC):
     # MODE = 'css'
     MODE = 'script'
 
+    USE_CONSTS = None
+
     @abstractmethod
     def get_dimensions(self, normalise=False):
         pass
@@ -42,6 +44,13 @@ class Color(ABC):
             clone.__class__ = colorspace
         else:
             raise('Invalid colorspace')
+
+    @visualizable
+    def as_constant(self, spec='BOTH'):
+        for cn,c in by_name(spec=spec).items():
+            if c == self:
+                return cn
+        return False
 
     @visualizable
     def interpolate(self, o, n):
@@ -298,6 +307,8 @@ class Color(ABC):
 
     @visualizable
     def __repr__(self, visualize=False):
+        if Color.USE_CONSTS and self.as_constant():
+            return self.as_constant()
         return self.__class__.__name__  + str(tuple(self.get_dimensions()))
 
 class RGB(Color):
@@ -414,6 +425,8 @@ class HEX(RGB):
 
     @visualizable
     def __repr__(self, mode=None, visualize=False):
+        if Color.USE_CONSTS and self.as_constant():
+            return self.as_constant()
         if not mode: mode = Color.MODE
         simple_hex = '#%02x%02x%02x' % tuple(self.get_dimensions(normalise=False))
         if mode == 'css':
@@ -478,7 +491,7 @@ class HSV(Color):
             else: return rgb
         super().to(colorspace)
 
-def by_name(name=None):
+def by_name(name=None, spec='BOTH'):
     html_spec = {      
             'white'                             : HEX('#FFFFFF'),
             'silver'                            : HEX('#C0C0C0'),
@@ -651,6 +664,10 @@ def by_name(name=None):
             'darkslategray'                     : RGB(47 , 79 , 79 ),
             'black'                             : RGB(0  , 0  , 0  ),
             }
-    all_constants = dict(x11_spec, **html_spec)
-    if name: return all_constants[name.lower()]
-    else: return all_constants
+    if spec.lower() == 'x11':
+        le_spec = x11_spec
+    elif spec.lower() == 'html':
+        le_spec = html_spec
+    else:
+        le_spec = dict(x11_spec, **html_spec)
+    return le_spec[name.lower()] if name else le_spec
