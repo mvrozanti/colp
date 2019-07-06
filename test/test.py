@@ -221,13 +221,13 @@ def test_is_major():
     assert RGB(119,120,130).is_blue()
 
 def test_is_named_constant():
-    Color.USE_CONSTS = None
+    Color.USE_CONSTANT_SPEC = None
     assert repr(gainsboro) == 'RGB(220, 220, 220)'
     assert repr(red) == "HEX('#ff0000')"
-    Color.USE_CONSTS = 'hTmL'
+    Color.USE_CONSTANT_SPEC = 'hTmL'
     assert repr(gainsboro) == 'RGB(220, 220, 220)'
     assert repr(red) == "red"
-    Color.USE_CONSTS = 'x11'
+    Color.USE_CONSTANT_SPEC = 'x11'
     assert repr(gainsboro) == 'gainsboro'
     assert repr(red) == "red"
     
