@@ -16,7 +16,8 @@ def visualizable(func):
         func_ret = func(self, *args, **kwargs)
         try:
             if 'visualize' not in kwargs and Color.visualizer:
-                Color.visualizer.configure(background=self.to(HEX).__repr__('css', visualize=False))
+                z = func_ret if isinstance(func_ret, Color) else self
+                Color.visualizer.configure(background=z.to(HEX).__repr__('css', visualize=False))
         except Exception as e: print(e)
         return func_ret
     return wrapper
