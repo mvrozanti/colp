@@ -219,6 +219,17 @@ def test_is_major():
     assert RGB(120,119,100).is_red()
     assert RGB(119,120,100).is_green()
     assert RGB(119,120,130).is_blue()
+
+def test_is_named_constant():
+    Color.USE_CONSTS = None
+    assert repr(gainsboro) == 'RGB(220, 220, 220)'
+    assert repr(red) == "HEX('#ff0000')"
+    Color.USE_CONSTS = 'hTmL'
+    assert repr(gainsboro) == 'RGB(220, 220, 220)'
+    assert repr(red) == "red"
+    Color.USE_CONSTS = 'x11'
+    assert repr(gainsboro) == 'gainsboro'
+    assert repr(red) == "red"
     
 # https://stackoverflow.com/questions/16444726/binary-representation-of-float-in-python-bits-not-hex
 if __name__ == '__main__': 

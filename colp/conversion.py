@@ -46,8 +46,8 @@ class Color(ABC):
             raise('Invalid colorspace')
 
     @visualizable
-    def as_constant(self, spec='BOTH'):
-        for cn,c in by_name(spec=spec).items():
+    def as_constant(self):
+        for cn,c in by_name(spec=Color.USE_CONSTS).items():
             if c == self:
                 return cn
         return False
@@ -664,10 +664,10 @@ def by_name(name=None, spec='BOTH'):
             'darkslategray'                     : RGB(47 , 79 , 79 ),
             'black'                             : RGB(0  , 0  , 0  ),
             }
-    if spec.lower() == 'x11':
+    if spec is None or spec == 'BOTH':
+        le_spec = dict(x11_spec, **html_spec)
+    elif spec.lower() == 'x11':
         le_spec = x11_spec
     elif spec.lower() == 'html':
         le_spec = html_spec
-    else:
-        le_spec = dict(x11_spec, **html_spec)
     return le_spec[name.lower()] if name else le_spec
