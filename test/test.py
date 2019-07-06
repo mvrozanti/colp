@@ -113,16 +113,17 @@ def test__er_suffix_and_brightness():
     print(darkest_green)
     print(darkest_blue)
     assert -darkest_red == lightest_blue
-    assert darkest_red.brightness() == darkest_green.brightness() == darkest_blue.brightness() == 1/(255*3)
+    assert darkest_red.brightness() == darkest_green.brightness() == darkest_blue.brightness() == 1/255
 
 def test_access_channel():
     assert RGB(25,0,0)[0] == 25
 
-def test_increase_brightness():
+def test_delta_brightness():
     print('\n')
     print('brightness')
     darkest_red = RGB(1,0,0)
     print(darkest_red.brighter(39))
+    assert cyan.darker().brighter().brightness(normalise=False) == 254
 
 def test_truediv_and_mul():
     print('\n')

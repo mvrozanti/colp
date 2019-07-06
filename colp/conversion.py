@@ -64,16 +64,15 @@ class Color(ABC):
 
     @visualizable
     def brightness(self, normalise=True):
-        if normalise:
-            return sum(self.get_dimensions(normalise=True)) / len(self.get_dimensions())
+        return max(self.get_dimensions(normalise=normalise))
 
     @visualizable
-    def brighter(self, factor=1.1):
+    def brighter(self, factor=1.01):
         return self.to(RGB).brighter(factor=factor).to(self.__class__)
 
     @visualizable
-    def darker(self, factor=1.1):
-        return self.to(RGB).brighter(factor=factor).to(self.__class__)
+    def darker(self, factor=1.01):
+        return self.to(RGB).brighter(factor=1/factor).to(self.__class__)
 
     @visualizable
     def _inc_channel(self, chan_ix, factor=1):
@@ -343,8 +342,8 @@ class RGB(Color):
         return self.__mul__(1/o)
 
     @visualizable
-    def brighter(self, factor=2):
-        return self * factor
+    def brighter(self, factor=1.01):
+        return (self * factor) % 256
 
     @visualizable
     def __and__(self, o):
