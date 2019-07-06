@@ -30,7 +30,7 @@ class Color(ABC):
     # MODE = 'css'
     MODE = 'script'
 
-    USE_CONSTS = None
+    USE_CONSTANT_SPEC = None
 
     @abstractmethod
     def get_dimensions(self, normalise=False):
@@ -47,7 +47,7 @@ class Color(ABC):
 
     @visualizable
     def as_constant(self):
-        for cn,c in by_name(spec=Color.USE_CONSTS).items():
+        for cn,c in by_name(spec=Color.USE_CONSTANT_SPEC).items():
             if c == self:
                 return cn
         return False
@@ -307,7 +307,7 @@ class Color(ABC):
 
     @visualizable
     def __repr__(self, visualize=False):
-        if Color.USE_CONSTS and self.as_constant():
+        if Color.USE_CONSTANT_SPEC and self.as_constant():
             return self.as_constant()
         return self.__class__.__name__  + str(tuple(self.get_dimensions()))
 
@@ -425,7 +425,7 @@ class HEX(RGB):
 
     @visualizable
     def __repr__(self, mode=None, visualize=False):
-        if Color.USE_CONSTS and self.as_constant():
+        if Color.USE_CONSTANT_SPEC and self.as_constant():
             return self.as_constant()
         if not mode: mode = Color.MODE
         simple_hex = '#%02x%02x%02x' % tuple(self.get_dimensions(normalise=False))

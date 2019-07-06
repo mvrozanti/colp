@@ -40,7 +40,7 @@ if __name__ == '__main__':
     Color.MODE = 'css' if args.css_mode else 'script'
 
     if args.named_constants is not None:
-        Color.USE_CONSTS = 'BOTH' if args.named_constants == [] else args.named_constants 
+        Color.USE_CONSTANT_SPEC = 'BOTH' if args.named_constants == [] else args.named_constants 
 
     for c in args.VAR:
         exec(c)
