@@ -54,11 +54,8 @@ class Color(ABC):
         i = self.to(RGB)
         o = o.to(RGB)
         while len(res) * delta_perc != 100:
-            it = len(res) * delta_perc
-            r = i[0] + (o[0] - i[0]) * it / 100
-            g = i[1] + (o[1] - i[1]) * it / 100
-            b = i[2] + (o[2] - i[2]) * it / 100
-            res += [RGB(*[r,g,b]).to(self.__class__)]
+            rgb = i + (o - i) * len(res) * delta_perc / 100
+            res += [rgb.to(self.__class__)]
         return res + [o.to(oc)]
 
     @visualizable
