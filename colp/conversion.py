@@ -338,7 +338,6 @@ class RGB(Color):
             return [int(255*self.r),int(255*self.g),int(255*self.b)] + \
                     ([int(255*self.a)] if self.a else [])
 
-    @visualizable
     def to(self, colorspace, normalise=False):
         if not colorspace or isinstance(self, colorspace):
             return self
@@ -417,7 +416,6 @@ class HEX(RGB):
         self.b = int(str_repr[4//ws:6//ws] * ws, 16) / 255
         self.a = int(str_repr[6//ws:8//ws] * ws, 16) / 255 if len(str_repr) > 6 else 0
 
-    @visualizable
     def to(self, colorspace):
         if colorspace == RGB:
             return RGB(*self.get_dimensions(normalise=True))
@@ -481,7 +479,6 @@ class HSV(Color):
         s = factor
         return HSV(h, max(min(s,1), 0), v)
 
-    @visualizable
     def to(self, colorspace):
         if not colorspace or isinstance(self, colorspace): return self
         if issubclass(colorspace, RGB):
