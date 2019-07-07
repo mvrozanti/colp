@@ -311,7 +311,7 @@ class Color(ABC):
             return self.get_dimensions() == other.get_dimensions()
         if isinstance(other, (int,float)):
             return max(self.get_dimensions()) == other
-        return other.to(self.__class__) == self or other == self
+        return other.to(self.__class__) == self or self.to(other.__class__) == other
 
     @visualizable
     def __repr__(self, visualize=False):
@@ -435,6 +435,9 @@ class CMYK(RGB):
             self.b = (1 - dims[2]) * (1 - dims[3])
             self.a = 0
 
+    def __eq__(self, o):
+        return self.to(RGB) == o
+
     def to(self, cls):
         if cls == RGB:
             return cls(*[self.r,self.g,self.b])
@@ -462,6 +465,9 @@ class HEX(RGB):
         self.g = int(str_repr[2//ws:4//ws] * ws, 16) / 255
         self.b = int(str_repr[4//ws:6//ws] * ws, 16) / 255
         self.a = int(str_repr[6//ws:8//ws] * ws, 16) / 255 if len(str_repr) > 6 else 0
+
+    def __eq__(self, o):
+        return self.to(RGB) == o
 
     def to(self, colorspace):
         if colorspace == RGB:
