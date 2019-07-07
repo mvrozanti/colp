@@ -208,9 +208,11 @@ def test_interpolate():
     inclusive_between = blue.interpolate(red, 10)
     assert inclusive_between[0] == blue
     assert inclusive_between[-1] == red
-    # assert inclusive_between[5][0] == inclusive_between[5][2] 
+    assert inclusive_between[4][2] == inclusive_between[5][0]
+    assert inclusive_between[4][0] == inclusive_between[5][2]
     print(inclusive_between)
     assert len(inclusive_between) == 10
+
     matrix = blue.interpolate((red,green), 10)
     for row in matrix:
         assert isinstance(row, list)
@@ -230,6 +232,15 @@ def test_is_named_constant():
     Color.USE_CONSTANT_SPEC = 'x11'
     assert repr(gainsboro) == 'gainsboro'
     assert repr(red) == "red"
+
+# def test_cmyk():
+#     cmyk_black = CMYK(0,0,0,100) 
+#     hex_black = black
+#     rgb_black = RGB(0,0,0)
+#     hsv_black = HSV(0,0,0)
+#     assert cmyk_black == hex_black and hex_black == cmyk_black
+#     assert cmyk_black == rgb_black and rgb_black == cmyk_black
+#     assert cmyk_black == hsv_black and hsv_black == cmyk_black
     
 # https://stackoverflow.com/questions/16444726/binary-representation-of-float-in-python-bits-not-hex
 if __name__ == '__main__': 

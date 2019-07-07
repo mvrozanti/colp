@@ -17,7 +17,12 @@ def visualizable(func):
         try:
             if 'visualize' not in kwargs and Color.visualizer:
                 z = func_ret if isinstance(func_ret, Color) else self
-                Color.visualizer.configure(background=z.to(HEX).__repr__('css', visualize=False))
+                z = z.to(HEX)
+                om = Color.MODE
+                Color.MODE = 'css'
+                simple_hex = '#%02x%02x%02x' % tuple(z.get_dimensions(normalise=False))
+                Color.MODE = om
+                Color.visualizer.configure(background=simple_hex)
         except Exception as e: print(e)
         return func_ret
     return wrapper
@@ -62,9 +67,12 @@ class Color(ABC):
         oc = o.__class__
         i = self.to(RGB)
         o = o.to(RGB)
+        import code
         while len(res) * delta_perc != 100:
-            rgb = i + (o - i) * len(res) * delta_perc / 100
-            res += [rgb.to(self.__class__)]
+            r = i[0] + (o[0] - i[0]) * len(res) * delta_perc / 100
+            g = i[1] + (o[1] - i[1]) * len(res) * delta_perc / 100
+            b = i[2] + (o[2] - i[2]) * len(res) * delta_perc / 100
+            res += [RGB(r,g,b)]
         return res + [o.to(oc)]
 
     @visualizable
@@ -330,7 +338,6 @@ class RGB(Color):
             self.a %= 255;
             self.a /= 255;
 
-    @visualizable
     def get_dimensions(self, normalise=False):
         if normalise:
             return [self.r,self.g,self.b] + ([self.a] if self.a else [])
@@ -404,6 +411,37 @@ class RGB(Color):
 
     # def __repr__(self):
     #     return 'RGB(%3d,%3d,%3d)' % tuple(self.get_dimensions())
+
+class CMYK(RGB):
+
+    def __init__(self, *dims):
+        self.noK = len(dims) == 3
+        if isinstance(dims, Iterable):
+            if not detect_normalised(dims):
+                dims = [d/100 for d in dims]
+            if self.noK: 
+                dims += [0]
+            self.r = (1 - dims[0]) * (1 - dims[3])
+            self.g = (1 - dims[1]) * (1 - dims[3])
+            self.b = (1 - dims[2]) * (1 - dims[3])
+            self.a = 0
+
+    def to(self, cls):
+        if cls == RGB:
+            return cls(*[self.r,self.g,self.b])
+
+    def get_dimensions(self, normalise=False):
+        k = 0 if self.noK else (1 - max([self.r, self.g, self.b])) 
+        if k != 1.0:
+            c = (1-self.r-k) / (1-k)
+            m = (1-self.g-k) / (1-k)
+            y = (1-self.b-k) / (1-k)
+            normalised_dims = [c,m,y] + ([k] if k else [])
+        else:
+            normalised_dims = [0,0,0,k]
+        if normalise:
+            return normalised_dims
+        return [int(100*d) for d in normalised_dims]
 
 class HEX(RGB):
 
