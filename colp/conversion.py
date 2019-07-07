@@ -17,7 +17,12 @@ def visualizable(func):
         try:
             if 'visualize' not in kwargs and Color.visualizer:
                 z = func_ret if isinstance(func_ret, Color) else self
-                Color.visualizer.configure(background=z.to(HEX).__repr__('css', visualize=False))
+                z = z.to(HEX)
+                om = Color.MODE
+                Color.MODE = 'css'
+                simple_hex = '#%02x%02x%02x' % tuple(z.get_dimensions(normalise=False))
+                Color.MODE = om
+                Color.visualizer.configure(background=simple_hex)
         except Exception as e: print(e)
         return func_ret
     return wrapper
@@ -62,9 +67,12 @@ class Color(ABC):
         oc = o.__class__
         i = self.to(RGB)
         o = o.to(RGB)
+        import code
         while len(res) * delta_perc != 100:
-            rgb = i + (o - i) * len(res) * delta_perc / 100
-            res += [rgb.to(self.__class__)]
+            r = i[0] + (o[0] - i[0]) * len(res) * delta_perc / 100
+            g = i[1] + (o[1] - i[1]) * len(res) * delta_perc / 100
+            b = i[2] + (o[2] - i[2]) * len(res) * delta_perc / 100
+            res += [RGB(r,g,b)]
         return res + [o.to(oc)]
 
     @visualizable
@@ -330,7 +338,6 @@ class RGB(Color):
             self.a %= 255;
             self.a /= 255;
 
-    @visualizable
     def get_dimensions(self, normalise=False):
         if normalise:
             return [self.r,self.g,self.b] + ([self.a] if self.a else [])
@@ -338,7 +345,6 @@ class RGB(Color):
             return [int(255*self.r),int(255*self.g),int(255*self.b)] + \
                     ([int(255*self.a)] if self.a else [])
 
-    @visualizable
     def to(self, colorspace, normalise=False):
         if not colorspace or isinstance(self, colorspace):
             return self
@@ -429,12 +435,10 @@ class CMYK(RGB):
             self.b = (1 - dims[2]) * (1 - dims[3])
             self.a = 0
 
-    @visualizable
     def to(self, cls):
         if cls == RGB:
             return cls(*[self.r,self.g,self.b])
 
-    @visualizable
     def get_dimensions(self, normalise=False):
         k = 0 if self.noK else (1 - max([self.r, self.g, self.b])) 
         if k != 1.0:
@@ -459,7 +463,6 @@ class HEX(RGB):
         self.b = int(str_repr[4//ws:6//ws] * ws, 16) / 255
         self.a = int(str_repr[6//ws:8//ws] * ws, 16) / 255 if len(str_repr) > 6 else 0
 
-    @visualizable
     def to(self, colorspace):
         if colorspace == RGB:
             return RGB(*self.get_dimensions(normalise=True))
@@ -523,7 +526,6 @@ class HSV(Color):
         s = factor
         return HSV(h, max(min(s,1), 0), v)
 
-    @visualizable
     def to(self, colorspace):
         if not colorspace or isinstance(self, colorspace): return self
         if issubclass(colorspace, RGB):
