@@ -6,7 +6,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
      name='colp',  
-     version='0.0.1',
+     version='0.0.2',
      author="Marcelo V. Rozanti",
      author_email="mvrozanti@hotmail.com",
      description="Color Processor",
@@ -16,8 +16,12 @@ setuptools.setup(
      packages=setuptools.find_packages(),
      scripts=['colp/colp'],
      classifiers=[
-         "Development Status :: 3 - Alpha",
-         "Topic :: Internet",
-         "License :: OSI Approved :: Apache Software License",
+         "Development Status :: 4 - Beta",
+         "Topic :: Artistic Software",
+         "Intended Audience :: Developers",
+         "Programming Language :: Python :: 3.4",
+         "Programming Language :: Python :: 3.5",
+         "Programming Language :: Python :: 3.6",
+         "Programming Language :: Python :: 3 :: Only",
          ],
  )
