@@ -2,7 +2,7 @@
 import pytest
 import sys
 sys.path.append('..')
-from colp import Color,RGB,HSV,HEX,by_name
+from colp import Color,RGB,HSV,HEX,CMYK,by_name
 
 all_colors = by_name() # make sure to load before settting Color.MODE below
 for c_name,c_var in all_colors.items():
@@ -230,6 +230,15 @@ def test_is_named_constant():
     Color.USE_CONSTANT_SPEC = 'x11'
     assert repr(gainsboro) == 'gainsboro'
     assert repr(red) == "red"
+
+def test_cmyk():
+    cmyk_black = CMYK(0,0,0,100) 
+    hex_black = black
+    rgb_black = RGB(0,0,0)
+    hsv_black = HSV(0,0,0)
+    assert cmyk_black == hex_black and hex_black == cmyk_black
+    assert cmyk_black == rgb_black and rgb_black == cmyk_black
+    assert cmyk_black == hsv_black and hsv_black == cmyk_black
     
 # https://stackoverflow.com/questions/16444726/binary-representation-of-float-in-python-bits-not-hex
 if __name__ == '__main__': 

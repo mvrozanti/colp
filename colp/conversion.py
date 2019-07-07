@@ -299,11 +299,11 @@ class Color(ABC):
     def __eq__(self, other):
         if other is None: 
             return False
-        if isinstance(other, self.__class__) or isinstance(self, other.__class__):
+        if isinstance(other, self.__class__) or isinstance(self, other.__class__): # is instance of other class
             return self.get_dimensions() == other.get_dimensions()
         if isinstance(other, (int,float)):
             return max(self.get_dimensions()) == other
-        return other.to(self.__class__) == self
+        return other.to(self.__class__) == self or other == self
 
     @visualizable
     def __repr__(self, visualize=False):
@@ -343,10 +343,19 @@ class RGB(Color):
         if not colorspace or isinstance(self, colorspace):
             return self
         if colorspace is HSV:
-            hsv_dimensions = colorsys.rgb_to_hsv(*self.get_dimensions(normalise=True))
-            return HSV(*hsv_dimensions)
+            return HSV(*colorsys.rgb_to_hsv(*self.get_dimensions(normalise=True)))
         if colorspace is HEX:
             return HEX('#%02x%02x%02x' % tuple(self.get_dimensions()))
+        if colorspace is CMYK:
+            k = 1.0 - max([self.r, self.g, self.b])
+            if k != 1.0:
+                c = (1-self.r-k) / (1-k)
+                m = (1-self.g-k) / (1-k)
+                y = (1-self.b-k) / (1-k)
+                normalised_dims = [c,m,y] + ([k] if k else [])
+            else:
+                normalised_dims = [0.,0.,0.,k]
+            return CMYK(*normalised_dims)
 
     @visualizable
     def __truediv__(self, o):
@@ -405,6 +414,39 @@ class RGB(Color):
 
     # def __repr__(self):
     #     return 'RGB(%3d,%3d,%3d)' % tuple(self.get_dimensions())
+
+class CMYK(RGB):
+
+    def __init__(self, *dims):
+        self.noK = len(dims) == 3
+        if isinstance(dims, Iterable):
+            if not detect_normalised(dims):
+                dims = [d/100 for d in dims]
+            if self.noK: 
+                dims += [0]
+            self.r = (1 - dims[0]) * (1 - dims[3])
+            self.g = (1 - dims[1]) * (1 - dims[3])
+            self.b = (1 - dims[2]) * (1 - dims[3])
+            self.a = 0
+
+    @visualizable
+    def to(self, cls):
+        if cls == RGB:
+            return cls(*[self.r,self.g,self.b])
+
+    @visualizable
+    def get_dimensions(self, normalise=False):
+        k = 0 if self.noK else (1 - max([self.r, self.g, self.b])) 
+        if k != 1.0:
+            c = (1-self.r-k) / (1-k)
+            m = (1-self.g-k) / (1-k)
+            y = (1-self.b-k) / (1-k)
+            normalised_dims = [c,m,y] + ([k] if k else [])
+        else:
+            normalised_dims = [0,0,0,k]
+        if normalise:
+            return normalised_dims
+        return [int(100*d) for d in normalised_dims]
 
 class HEX(RGB):
 
