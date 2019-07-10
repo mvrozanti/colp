@@ -10,6 +10,9 @@ python:
 - 3.5-dev
 - '3.6'
 - 3.6-dev
+
+install:
+  - apt-get install python-tk
 matrix:
   allow_failures:
     - python: '2.7'
