@@ -18,6 +18,7 @@ if __name__ == '__main__':
     parser.add_argument('-n'                     , '--no-banner'                  , action='store_true'                       , help='don\'t show  banner on interactive mode')
     parser.add_argument('-v'                     , '--visualizer'                 , action='store_true'                       , help='visualize current color processed')
     parser.add_argument('-c'                     , '--css-mode'                   , action='store_true'                       , help='css-compliant output')
+    parser.add_argument('-d'                     , '--distance'                   , metavar='COLOR_MODEL', default=RGB        , help='set color model for distance comparison')
     parser.add_argument('-s'                     , '--scripting-mode'             , action='store_true'                       , default=True                                    , help='colp script output, which can be reinterpreted by colp')
     # parser.add_argument('-d'                   , '--debug'                      ,                                           , help='stop ')
     parser.add_argument('-l'                     , '--load-script'                , metavar='SCRIPT_FILE'                     , help='load script from file or stdin')
@@ -38,6 +39,8 @@ if __name__ == '__main__':
         time.sleep(n)
 
     v = lambda x: Color.visualize(x)
+
+    Color.DISTANCE = eval(args.distance)
 
     Color.MODE = 'css' if args.css_mode else 'script'
 

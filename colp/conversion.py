@@ -30,6 +30,8 @@ class Color(ABC):
     # MODE = 'css'
     MODE = 'script'
 
+    DISTANCE = None
+
     USE_CONSTANT_SPEC = None
 
     def visualize(color):
@@ -105,20 +107,6 @@ class Color(ABC):
         return RGB(*channels).to(self.__class__) 
 
     @visualizable
-    def __lt__(self, o):
-        '''
-        compare in sense of brightness. The brightness of a color is the greatest value among the RGB channels
-        '''
-        if isinstance(o, (int,float)):
-            return max(self.to(RGB).get_dimensions()) < o
-        if isinstance(o, Color):
-            i = self.to(RGB)
-            o = o.to(RGB)
-            b_i = max(i.get_dimensions())
-            b_o = max(o.get_dimensions())
-            return b_i < b_o
-
-    @visualizable
     def __xor__(self, o):
         if isinstance(o, int):
             return RGB(*[d ^ o for d in self.to(RGB).get_dimensions()]).to(self.__class__)
@@ -164,45 +152,47 @@ class Color(ABC):
         return RGB(*abs_chans_float).to(self.__class__)
 
     @visualizable
-    def __le__(self, o):
-        '''
-        compare in sense of brightness. The brightness of a color is the greatest value among the RGB channels
-        '''
+    def __lt__(self, o):
         if isinstance(o, (int,float)):
-            return max(self.get_dimensions()) <= o
+            return sum(self.to(RGB).get_dimensions()) < o
         if isinstance(o, Color):
-            i = self.to(RGB)
-            o = o.to(RGB)
-            b_i = max(i.get_dimensions())
-            b_o = max(o.get_dimensions())
+            i = self.to(Color.DISTANCE)
+            o = o.to(Color.DISTANCE)
+            b_i = sum(i.get_dimensions())
+            b_o = sum(o.get_dimensions())
+            return b_i < b_o
+
+    @visualizable
+    def __le__(self, o):
+        if isinstance(o, (int,float)):
+            return sum(self.get_dimensions()) <= o
+        if isinstance(o, Color):
+            i = self.to(Color.DISTANCE)
+            o = o.to(Color.DISTANCE)
+            b_i = sum(i.get_dimensions())
+            b_o = sum(o.get_dimensions())
             return b_i <= b_o
 
     @visualizable
     def __ge__(self, o):
-        '''
-        compare in sense of brightness. The brightness of a color is the greatest value among the RGB channels
-        '''
         if isinstance(o, (int,float)):
-            return max(self.get_dimensions()) >= o
+            return sum(self.get_dimensions()) >= o
         if isinstance(o, Color):
-            i = self.to(RGB)
-            o = o.to(RGB)
-            b_i = max(i.get_dimensions())
-            b_o = max(o.get_dimensions())
+            i = self.to(Color.DISTANCE)
+            o = o.to(Color.DISTANCE)
+            b_i = sum(i.get_dimensions())
+            b_o = sum(o.get_dimensions())
             return b_i >= b_o
 
     @visualizable
     def __gt__(self, o):
-        '''
-        compare in sense of brightness. The brightness of a color is the greatest value among the RGB channels
-        '''
         if isinstance(o, (int,float)):
             return max(self.get_dimensions()) > o
         if isinstance(o, Color):
-            i = self.to(RGB)
-            o = o.to(RGB)
-            b_i = max(i.get_dimensions())
-            b_o = max(o.get_dimensions())
+            i = self.to(Color.DISTANCE)
+            o = o.to(Color.DISTANCE)
+            b_i = sum(i.get_dimensions())
+            b_o = sum(o.get_dimensions())
             return b_i > b_o
 
     @visualizable
