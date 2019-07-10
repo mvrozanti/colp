@@ -1,8 +1,12 @@
 language: python
+
+sudo: yes
+
 os: 
   - linux
   - osx
   - windows
+
 python:
 - '2.7'
 - '3.4'
@@ -12,7 +16,8 @@ python:
 - 3.6-dev
 
 install:
-  - apt-get install python-tk
+  - sudo apt-get install python-tk
+
 matrix:
   allow_failures:
     - python: '2.7'
@@ -24,5 +29,6 @@ script:
   - pip install colp coveralls pytest-cov
   - pytest --cov colp test/test.py 
   - echo 'a=RGB(1,2,3)' | colp 
+
 after_success:
   - coveralls
