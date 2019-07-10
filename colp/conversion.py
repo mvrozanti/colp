@@ -17,12 +17,7 @@ def visualizable(func):
         try:
             if 'visualize' not in kwargs and Color.visualizer:
                 z = func_ret if isinstance(func_ret, Color) else self
-                z = z.to(HEX)
-                om = Color.MODE
-                Color.MODE = 'css'
-                simple_hex = '#%02x%02x%02x' % tuple(z.get_dimensions(normalise=False))
-                Color.MODE = om
-                Color.visualizer.configure(background=simple_hex)
+                Color.visualize(z)
         except Exception as e: print(e)
         return func_ret
     return wrapper
@@ -36,6 +31,14 @@ class Color(ABC):
     MODE = 'script'
 
     USE_CONSTANT_SPEC = None
+
+    def visualize(color):
+        z = color.to(HEX)
+        om = Color.MODE
+        Color.MODE = 'css'
+        simple_hex = '#%02x%02x%02x' % tuple(z.get_dimensions(normalise=False))
+        Color.MODE = om
+        Color.visualizer.configure(background=simple_hex)
 
     @abstractmethod
     def get_dimensions(self, normalise=False):
@@ -58,7 +61,9 @@ class Color(ABC):
         return False
 
     @visualizable
-    def interpolate(self, o, n):
+    def interpolate(self, o, n=3):
+        if o is None:
+            return None
         if isinstance(o, Iterable):
             return [self.interpolate(c, n) for c in o]
         n -= 1
@@ -467,7 +472,10 @@ class HEX(RGB):
         self.a = int(str_repr[6//ws:8//ws] * ws, 16) / 255 if len(str_repr) > 6 else 0
 
     def __eq__(self, o):
-        return self.to(RGB) == o
+        if isinstance(o, Color):
+            return self.to(RGB) == o.to(RGB)
+        if isinstance(o, (int,float)):
+            return self.to(RGB).brightness() == o
 
     def to(self, colorspace):
         if colorspace == RGB:

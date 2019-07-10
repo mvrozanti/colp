@@ -244,6 +244,13 @@ def test_cmyk():
     assert cmyk_black == hsv_black  and hsv_black  == cmyk_black
     assert rgb_black  == hsv_black  and hsv_black  == rgb_black
     assert hex_black  == cmyk_black and cmyk_black == hex_black
+
+def test_collection_operations():
+    cs = list(by_name().values())
+    len1 = len(cs)
+    cs.remove(red)
+    len2 = len(cs)
+    assert len2 < len1
     
 # https://stackoverflow.com/questions/16444726/binary-representation-of-float-in-python-bits-not-hex
 if __name__ == '__main__': 

@@ -34,8 +34,10 @@ if __name__ == '__main__':
         locals()[c_name] = c_var
 
     def sleep(n):
-        Color.visualizer.update
+        Color.visualizer.update()
         time.sleep(n)
+
+    v = lambda x: Color.visualize(x)
 
     Color.MODE = 'css' if args.css_mode else 'script'
 
@@ -45,15 +47,15 @@ if __name__ == '__main__':
     for c in args.VAR:
         exec(c)
     
-    if args.load_script:
-        exec(''.join(readlines(args.load_script)))
-
-    is_tty = sys.stdin.isatty()
-
     if args.visualizer:
         import tkinter as tk 
         Color.visualizer = tk.Tk() 
         Color.visualizer.title('colp')
+
+    if args.load_script:
+        exec(''.join(readlines(args.load_script)))
+
+    is_tty = sys.stdin.isatty()
 
     def readfunc(prompt):
         return input('> ' if is_tty else '')
