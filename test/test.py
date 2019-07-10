@@ -256,17 +256,6 @@ def test_collection_operations():
     len2 = len(cs)
     assert len2 < len1
 
-def test_visualize():
-    import tkinter as tk 
-    Color.visualizer = tk.Tk() 
-    z = black + 1
-    Color.visualize(z)
-    try:
-        Color.visualize(None)
-        assert False
-    except Exception as e: 
-        assert True
-    
 # https://stackoverflow.com/questions/16444726/binary-representation-of-float-in-python-bits-not-hex
 if __name__ == '__main__': 
 
