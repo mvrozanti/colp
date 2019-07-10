@@ -150,6 +150,9 @@ def test_comparisons():
     assert RGB(3,3,3)     >= RGB(3,2,0)
     assert RGB(3,6,3)     >= RGB(3,2,0)
     assert HSV(3,6,3)     >= RGB(3,2,0)
+    assert HSV(3,6,3)     <= RGB(255,2,0)
+    assert HSV(3,6,3)     <= 12
+    assert HSV(3,6,3)     >= 12
     assert purple         <  257
     assert purple.to(HSV) <  257
 
@@ -216,6 +219,8 @@ def test_interpolate():
     for row in matrix:
         assert isinstance(row, list)
 
+    assert blue.interpolate(None) is None
+
 def test_is_major():
     assert RGB(120,119,100).is_red()
     assert RGB(119,120,100).is_green()
@@ -234,9 +239,9 @@ def test_is_named_constant():
 
 def test_cmyk():
     cmyk_black = CMYK(0,0,0,100) 
-    hex_black = black
-    rgb_black = RGB(0,0,0)
-    hsv_black = HSV(0,0,0)
+    hex_black  = black
+    rgb_black  = RGB(0,0,0)
+    hsv_black  = HSV(0,0,0)
     assert cmyk_black == hex_black  and hex_black  == cmyk_black
     assert hex_black  == rgb_black  and rgb_black  == hex_black
     assert cmyk_black == rgb_black  and rgb_black  == cmyk_black
@@ -250,6 +255,17 @@ def test_collection_operations():
     cs.remove(red)
     len2 = len(cs)
     assert len2 < len1
+
+def test_visualize():
+    import tkinter as tk 
+    Color.visualizer = tk.Tk() 
+    z = black + 1
+    Color.visualize(z)
+    try:
+        Color.visualize(None)
+        assert False
+    except Exception as e: 
+        assert True
     
 # https://stackoverflow.com/questions/16444726/binary-representation-of-float-in-python-bits-not-hex
 if __name__ == '__main__': 

@@ -15,10 +15,11 @@ def visualizable(func):
     def wrapper(self, *args, **kwargs):
         func_ret = func(self, *args, **kwargs)
         try:
-            if 'visualize' not in kwargs and Color.visualizer:
+            if Color.visualizer:
                 z = func_ret if isinstance(func_ret, Color) else self
                 Color.visualize(z)
-        except Exception as e: print(e)
+        except Exception as e: 
+            print(e)
         return func_ret
     return wrapper
 
@@ -42,18 +43,14 @@ class Color(ABC):
         Color.MODE = om
         Color.visualizer.configure(background=simple_hex)
 
-    @abstractmethod
-    def get_dimensions(self, normalise=False):
-        pass
-
-    @abstractmethod
-    def to(self, colorspace):
-        import inspect
-        if inspect.isclass(colorspace) and issubclass(colorspace, Color):
-            clone = copy.copy(self)
-            clone.__class__ = colorspace
-        else:
-            raise('Invalid colorspace')
+    # @abstractmethod
+    # def to(self, colorspace):
+    #     import inspect
+    #     if inspect.isclass(colorspace) and issubclass(colorspace, Color):
+    #         clone = copy.copy(self)
+    #         clone.__class__ = colorspace
+    #     else:
+    #         raise('Invalid colorspace')
 
     @visualizable
     def as_constant(self):
@@ -135,9 +132,9 @@ class Color(ABC):
     def __bool__(self):
         return self != 0
 
-    @visualizable
-    def __truth__(self):
-        return self != 0
+    # @visualizable
+    # def __truth__(self):
+    #     return self != 0
 
     @visualizable
     def __invert__(self):
