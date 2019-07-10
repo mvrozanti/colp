@@ -146,13 +146,12 @@ def test_monochrome_check():
     darkest_gray.is_monochrome()
 
 def test_comparisons():
-    assert RGB(255,0,127) >  RGB(200,200,200)
-    assert RGB(1,2,3)     <  RGB(4,2,0)
-    assert RGB(3,3,3)     <= RGB(3,2,0)
+    assert RGB(255,0,127) <  RGB(200,200,200)
+    assert RGB(3,3,3)     >= RGB(3,2,0)
     assert RGB(3,6,3)     >= RGB(3,2,0)
     assert HSV(3,6,3)     >= RGB(3,2,0)
-    assert purple         <  129
-    assert purple.to(HSV) <  129
+    assert purple         <  257
+    assert purple.to(HSV) <  257
 
 def test_float_inversion():
     print('\n')
