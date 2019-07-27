@@ -116,17 +116,17 @@ class Color(ABC):
     @visualizable
     def is_red(self):
         dims = self.to(RGB).get_dimensions()
-        return dims.index(max(dims)) == 0
+        return 0 in [ix for ix,v in enumerate(dims) if v == max(dims)] 
 
     @visualizable
     def is_green(self):
         dims = self.to(RGB).get_dimensions()
-        return dims.index(max(dims)) == 1
+        return 1 in [ix for ix,v in enumerate(dims) if v == max(dims)] 
 
     @visualizable
     def is_blue(self):
         dims = self.to(RGB).get_dimensions()
-        return dims.index(max(dims)) == 2
+        return 2 in [ix for ix,v in enumerate(dims) if v == max(dims)] 
 
     @visualizable
     def __bool__(self):

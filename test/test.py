@@ -225,6 +225,7 @@ def test_is_major():
     assert RGB(120,119,100).is_red()
     assert RGB(119,120,100).is_green()
     assert RGB(119,120,130).is_blue()
+    assert beige.is_red() and beige.is_green()
 
 def test_is_named_constant():
     Color.USE_CONSTANT_SPEC = None
