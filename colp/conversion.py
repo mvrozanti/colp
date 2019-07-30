@@ -433,6 +433,7 @@ class CMYK(RGB):
     def to(self, cls):
         if cls == RGB:
             return cls(*[self.r,self.g,self.b])
+        return RGB(*[self.r,self.g,self.b]).to(cls)
 
     def get_dimensions(self, normalise=False):
         k = 0 if self.noK else (1 - max([self.r, self.g, self.b])) 

@@ -4,6 +4,7 @@
 [![Build Status](https://travis-ci.com/mvrozanti/colp.svg?token=Hrxne9dbhCC141HWAM1p&branch=master)](https://travis-ci.com/mvrozanti/colp)
 [![Coverage Status](https://coveralls.io/repos/github/mvrozanti/colp/badge.svg?branch=master)](https://coveralls.io/github/mvrozanti/colp?branch=master)
 [![PyPI](https://img.shields.io/pypi/v/colp.svg)](https://pypi.org/project/colp/)
+[![License](https://img.shields.io/badge/license-WTFPL-red)](https://github.com/mvrozanti/colp/blob/master/LICENSE)
 
 The color processor 
 
