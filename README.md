@@ -47,7 +47,6 @@ True
 > skyblue ; skyblue.brighter()    # brighter in HSV space
 RGB(135, 206, 235)
 RGB(136, 208, 237)
-
 > a_set_of_colors = [RGB(25,25,112), HSV(186,23,90), plum, orchid, fuchsia, HEX('#800080')]
 > sorted(a_set_of_colors)
 [RGB(25, 25, 112), HEX('#800080'), RGB(218, 112, 214), RGB(221, 160, 221), HSV(186, 23, 90), HEX('#ff00ff')]
@@ -72,8 +71,19 @@ RGB(0, 255, 127)
 RGB(0, 255, 255)
 RGB(0, 127, 255)
 RGB(0, 0, 255)
-> red.interpolate(blue, 10)       # interpolate between colors
-[HEX('#ff0000'), HEX('#e50019'), HEX('#cc0033'), HEX('#b2004c'), HEX('#990066'), HEX('#7f007f'), HEX('#660099'), HEX('#4c00b2'), HEX('#3300cc'), HEX('#1900e5'), HEX('#0000ff')]
+> for c in red.interpolate(blue,10): # interpolate between colors
+>       print(c)
+>
+RGB(255, 0, 0)
+RGB(226, 0, 28)
+RGB(198, 0, 56)
+RGB(170, 0, 85)
+RGB(141, 0, 113)
+RGB(113, 0, 141)
+RGB(85, 0, 170)
+RGB(56, 0, 198)
+RGB(28, 0, 226)
+HEX('#0000ff')
 ```
 
 #### Or pipe commands in
