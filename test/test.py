@@ -257,6 +257,23 @@ def test_collection_operations():
     len2 = len(cs)
     assert len2 < len1
 
+def test_circular_conversion():
+    print('\n')
+    print('circular conversion')
+    cs = [
+        RGB(0,0,0).to(HEX).to(CMYK).to(HSV).to(RGB),
+        RGB(0,0,0).to(CMYK).to(HEX).to(HSV).to(RGB),
+        HSV(0,0,0).to(HEX).to(CMYK).to(RGB).to(HSV),
+        RGB(0,0,0).to(HEX).to(HSV).to(CMYK).to(RGB),
+        RGB(0,0,0).to(HEX).to(RGB).to(HSV).to(CMYK),
+        RGB(0,0,0).to(HEX).to(HSV).to(RGB).to(CMYK),
+        RGB(0,0,0).to(HSV).to(HEX).to(RGB).to(CMYK),
+        RGB(0,0,0).to(HSV).to(HEX).to(CMYK).to(RGB),
+    ]
+    for c in cs:
+        print(c)
+
+
 # https://stackoverflow.com/questions/16444726/binary-representation-of-float-in-python-bits-not-hex
 if __name__ == '__main__': 
 
