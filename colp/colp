@@ -27,6 +27,13 @@ if __name__ == '__main__':
 
     args = parser.parse_args()
 
+    v = lambda x: Color.visualize(x)
+    
+    if args.visualizer:
+        import tkinter as tk 
+        Color.visualizer = tk.Tk() 
+        Color.visualizer.title('colp')
+
     readlines = lambda filename: (sys.stdin if filename == '-' else open(filename, 'r')).\
             readlines()
 
@@ -38,8 +45,6 @@ if __name__ == '__main__':
         Color.visualizer.update()
         time.sleep(n)
 
-    v = lambda x: Color.visualize(x)
-
     Color.DISTANCE = eval(args.distance)
 
     Color.MODE = 'css' if args.css_mode else 'script'
@@ -49,11 +54,6 @@ if __name__ == '__main__':
 
     for c in args.VAR:
         exec(c)
-    
-    if args.visualizer:
-        import tkinter as tk 
-        Color.visualizer = tk.Tk() 
-        Color.visualizer.title('colp')
 
     if args.load_script:
         exec(''.join(readlines(args.load_script)))
